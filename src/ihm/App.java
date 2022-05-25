@@ -1,10 +1,10 @@
 package ihm;
 
-import java.awt.EventQueue;
+import modele.*;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-import modele.Article;
 
 public class App {
 

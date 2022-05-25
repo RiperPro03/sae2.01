@@ -1,5 +1,7 @@
 package ihm;
 
+import modele.*;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
