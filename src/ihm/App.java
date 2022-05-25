@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import modele.Article;
+
 public class App {
 
 	private JFrame frame;
