@@ -14,6 +14,8 @@ public class Article {
 		this.quantitéEnStock = 0;
 	}
 	
+	// Test de commit
+	
 	public Fromage getFromage() {
 		return this.fromage;
 	}
