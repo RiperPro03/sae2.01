@@ -63,7 +63,7 @@ public class FEN_Accueil {
 		
 		JLabel image_header = new JLabel("Attente image");
 		header.add(image_header);
-		
+		 
 		txtFromageQuiRit = new JTextField();
 		txtFromageQuiRit.setForeground(Color.BLACK);
 		txtFromageQuiRit.setAlignmentX(Component.LEFT_ALIGNMENT);

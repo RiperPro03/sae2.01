@@ -83,7 +83,7 @@ public class FEN_Détails_Fromage {
 		FlowLayout fl_South_North = (FlowLayout) South_North.getLayout();
 		fl_South_North.setAlignment(FlowLayout.LEFT);
 		FOOTER.add(South_North);
-		
+		 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Type de vente : Prix TTC"}));
 		South_North.add(comboBox);
