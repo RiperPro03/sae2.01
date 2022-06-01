@@ -33,7 +33,7 @@ public class SaisieFromage {
 		case A_L_UNITE : 
 		    f = new FromageALUnité(désignation);
 		    if (this.prixArticle != null)
-		    	f.addArticle("", this.prixArticle[0]);
+		    	f.addArticle("A l'unité", this.prixArticle[0]);
 		    break;
 		case ENTIER_OU_MOITIE : 
 			f = new FromageEntierOuMoitié(désignation);

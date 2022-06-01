@@ -22,6 +22,8 @@ import javax.swing.JSpinner;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FEN_Détails_Fromage {
 
@@ -62,7 +64,7 @@ public class FEN_Détails_Fromage {
 		JPanel NORTH = new JPanel();
 		frame.getContentPane().add(NORTH);
 		
-		JLabel Titre_Détails_Fromage = new JLabel("Nom frometon");
+		JLabel Titre_Détails_Fromage = new JLabel(fromage.getDésignation());
 		NORTH.add(Titre_Détails_Fromage);
 		
 		JPanel détails_du_fromage = new JPanel();
@@ -88,7 +90,8 @@ public class FEN_Détails_Fromage {
 		FOOTER.add(South_North);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Type de vente : Prix TTC"}));
+		String[] listeOption = listeClé();
+		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		South_North.add(comboBox);
 		
 		JSpinner spinner_nb_fromage = new JSpinner();
@@ -105,8 +108,27 @@ public class FEN_Détails_Fromage {
 		South_South.add(btn_ajouter_panier);
 		
 		JButton btn_annuler_ajout = new JButton("Annuler");
+		eventClose(btn_annuler_ajout);
 		btn_annuler_ajout.setBackground(new Color(255, 69, 0));
 		South_South.add(btn_annuler_ajout);
+	}
+
+
+	private String[] listeClé() {
+		String[] listeOption = new String[fromage.getArticles().size()];
+		for (int i = 0; i < fromage.getArticles().size(); i++) {
+			listeOption[i] = fromage.getArticles().get(i).getClé();
+		}
+		return listeOption;
+	}
+
+
+	private void eventClose(JButton btn) {
+		btn.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+			}
+		});
 	}
 
 }
