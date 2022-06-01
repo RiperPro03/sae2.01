@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.List;
+
 import javax.swing.BoxLayout;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -13,6 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import modele.Articles;
+
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.JScrollBar;
@@ -20,6 +25,9 @@ import java.awt.Color;
 import javax.swing.JSlider;
 
 public class FEN_Accueil {
+	public modele.Articles stock;
+	public modele.Articles panier;
+	
 
 	private JFrame frame;
 	private JTextField txtFromageQuiRit;
@@ -44,6 +52,7 @@ public class FEN_Accueil {
 	 * Create the application.
 	 */
 	public FEN_Accueil() {
+		stock = modele.GenerationFromages.générationBaseFromages();
 		initialize();
 	}
 
