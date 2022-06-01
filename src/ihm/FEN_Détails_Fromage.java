@@ -103,9 +103,20 @@ public class FEN_Détails_Fromage {
 		FOOTER.add(South_South);
 		
 		JButton btn_ajouter_panier = new JButton("Ajouter au panier");
+		btn_ajouter_panier.addMouseListener(new MouseAdapter() {		// PAS TERMINER
+			public void mouseClicked(MouseEvent e) {
+				if (comboBox.getSelectedItem() == "1 kg") {
+					FEN_Panier.launch(); // Pour le test que lorsqu'on choisie 1kg ça execute la commande
+				}
+				if ((int)spinner_nb_fromage.getValue() == 10) {
+					FEN_Info_Facturation.launch(); // Pour le test que lorsqu'on choisie 10 en quantité ça execute la commande
+				}
+			}
+		});
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
 		South_South.add(btn_ajouter_panier);
+		
 		
 		JButton btn_annuler_ajout = new JButton("Annuler");
 		eventClose(btn_annuler_ajout);
