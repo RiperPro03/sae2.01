@@ -1,11 +1,14 @@
 package ihm;
 
+import modele.*;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -15,8 +18,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
-import modele.Articles;
 
 import java.awt.Font;
 import java.awt.Component;
@@ -108,7 +109,13 @@ public class FEN_Accueil {
 		frame.getContentPane().add(parcours_fromage);
 		parcours_fromage.setLayout(new BorderLayout(0, 0));
 		
-		JList liste_fromage = new JList();
+		
+		String[] fromagesListeD = new String[stock.getLesFromages().size()];
+		for (int i = 0; i < stock.getLesFromages().size(); i++) {
+			fromagesListeD[i] = stock.getLesFromages().get(i).getDésignation();
+		}
+		
+		JList liste_fromage = new JList(fromagesListeD);
 		parcours_fromage.add(liste_fromage, BorderLayout.CENTER);
 		
 		JSlider slider = new JSlider();
