@@ -22,16 +22,21 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
 import javax.swing.JSlider;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FEN_Accueil {
 	public modele.Articles stock;
 	public modele.Articles panier;
 	
-
 	private JFrame frame;
 	private JTextField txtFromageQuiRit;
+	private JList liste_fromage;
+	private String[] fromagesListeDs;
 
 	/**
 	 * Launch the application.
@@ -94,34 +99,58 @@ public class FEN_Accueil {
 		sélection_type.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		JButton btn_tout_fromage = new JButton("Tout");
+		affichageTout(btn_tout_fromage);
 		sélection_type.add(btn_tout_fromage);
 		
 		JButton btn_fromage_brebis = new JButton("Attente icon b");
+		filtre(btn_fromage_brebis,TypeLait.BREBIS);
 		sélection_type.add(btn_fromage_brebis);
 		
 		JButton btn_fromage_vache = new JButton("Attente icon v");
+		filtre(btn_fromage_vache,TypeLait.VACHE);
 		sélection_type.add(btn_fromage_vache);
 		
-		JButton btn_fromage_chèvre = new JButton("Attente icon");
+		JButton btn_fromage_chèvre = new JButton("Attente icon c");
+		filtre(btn_fromage_chèvre,TypeLait.CHEVRE);
 		sélection_type.add(btn_fromage_chèvre);
 		
-		JPanel parcours_fromage = new JPanel();
-		frame.getContentPane().add(parcours_fromage);
-		parcours_fromage.setLayout(new BorderLayout(0, 0));
+		JScrollPane scrollPane_1 = new JScrollPane();
+		frame.getContentPane().add(scrollPane_1);
 		
-		
-		String[] fromagesListeD = new String[stock.getLesFromages().size()];
-		for (int i = 0; i < stock.getLesFromages().size(); i++) {
-			fromagesListeD[i] = stock.getLesFromages().get(i).getDésignation();
+				
+		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
+		liste_fromage = new JList(fromagesListeDs);
+		liste_fromage.setVisibleRowCount(10);
+		scrollPane_1.setViewportView(liste_fromage);
+	}
+
+	public void affichageTout(JButton btn_tout_fromage) {
+		btn_tout_fromage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateListeFromageAccueil(stock.getLesFromages());
+			}
+		});
+	}
+
+	public void filtre(JButton btn_fromage_brebis,modele.TypeLait lait) {
+		btn_fromage_brebis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FEN_Accueil.this.updateListeFromageAccueil(stock.fromagesAuLaitDe(lait));
+			}
+		});
+	}
+
+	public String[] afficherFromagesAccueil(List<Fromage> lesFromages) {
+		String[] fromagesListeD = new String[lesFromages.size()];
+		for (int i = 0; i < lesFromages.size(); i++) {
+			fromagesListeD[i] = lesFromages.get(i).getDésignation();
 		}
-		
-		JList liste_fromage = new JList(fromagesListeD);
-		parcours_fromage.add(liste_fromage, BorderLayout.CENTER);
-		
-		JSlider slider = new JSlider();
-		slider.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		slider.setOrientation(SwingConstants.VERTICAL);
-		parcours_fromage.add(slider, BorderLayout.EAST);
+		return fromagesListeD;
+	}
+	
+	public void updateListeFromageAccueil(List<Fromage> lesFromages) {
+		this.fromagesListeDs = afficherFromagesAccueil(lesFromages);
+		this.liste_fromage.setListData(fromagesListeDs);
 	}
 
 }
