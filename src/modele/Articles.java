@@ -89,4 +89,18 @@ public class Articles {
 		return null;
 	}
 	
+	public float totalTTCFacture() {
+		int total = 0;
+		for(Fromage f : lesFromages) {
+			for(Article a : f.getArticles()) {
+				total += a.getPrixTTC() * a.getQuantitéEnStock();
+			}
+		}
+		return total;
+	}
+	
+	public float totalHTFacture() {
+		return this.totalTTCFacture() / 1.2F ; 
+	}
+	
 }
