@@ -27,6 +27,19 @@ public class FEN_Détails_Fromage {
 
 	private JFrame frame;
 	private Fromage fromage;
+	
+	public static void launch(Fromage f) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FEN_Détails_Fromage window = new FEN_Détails_Fromage(f);
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 
 	/**
@@ -43,7 +56,7 @@ public class FEN_Détails_Fromage {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // HIDE_ON_CLOSE pour juste fermer cette fenetre
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		
 		JPanel NORTH = new JPanel();

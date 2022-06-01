@@ -124,10 +124,12 @@ public class FEN_Accueil {
 				
 		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
-		liste_fromage.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
+		liste_fromage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				Fromage f = stock.getFromage((String)liste_fromage.getSelectedValue());
-				FEN_Détails_Fromage popUp = new FEN_Détails_Fromage(f);
+				FEN_Détails_Fromage.launch(f);
+				
 			}
 		});
 		liste_fromage.setVisibleRowCount(10);

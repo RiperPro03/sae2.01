@@ -1,5 +1,6 @@
 package ihm;
 
+import modele.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -21,10 +22,8 @@ public class FEN_Info_Facturation {
 	private JTable table1;
 	private JTable table2;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	
+	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,7 +49,7 @@ public class FEN_Info_Facturation {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JPanel North = new JPanel();
 		frame.getContentPane().add(North, BorderLayout.NORTH);
