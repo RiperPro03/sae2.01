@@ -50,4 +50,16 @@ public class Article {
 		return (this.fromage.equals(other.fromage) && this.clé.equals(other.clé));
 	}
 	
+	public void préempterQuantité(int quantité) {
+		
+	}
+	
+	public void rendreQuantité(int quantité) {
+		
+	}
+	
+	public String toStringIHM() {
+		return "void";
+	}
+	
 }
