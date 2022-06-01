@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,25 +24,30 @@ public class Test_Filtrage {
 		fromages.add(fromageBrebis2);
 		fromages.add(fromageBrebis1);
 		fromages.add(fromageBrebis);
-		Fromage fromageChèvre= new Fromage("Chevre 2");
+		Fromage fromageChèvre= new Fromage("Chèvre 2");
 		fromageChèvre.updateTypeFromage(TypeLait.CHEVRE);
-		Fromage fromageChèvre1 = new Fromage("chvre 1");
+		Fromage fromageChèvre1 = new Fromage("Chèvre 1");
 		fromageChèvre1.updateTypeFromage(TypeLait.CHEVRE);
-		Fromage fromageChèvre2 = new Fromage("Chevre");
+		Fromage fromageChèvre2 = new Fromage("Chèvre");
 		fromageChèvre2.updateTypeFromage(TypeLait.CHEVRE);
 		fromages.add(fromageChèvre1);
 		fromages.add(fromageChèvre2);
 		fromages.add(fromageChèvre);
 		Fromage fromageVache= new Fromage("Vache");
-		fromageChèvre.updateTypeFromage(TypeLait.VACHE);
+		fromageVache.updateTypeFromage(TypeLait.VACHE);
 		Fromage fromageVache1= new Fromage("Vache 1");
-		fromageChèvre1.updateTypeFromage(TypeLait.VACHE);
+		fromageVache1.updateTypeFromage(TypeLait.VACHE);
 		Fromage fromageVache2= new Fromage("Vache 2");
-		fromageChèvre2.updateTypeFromage(TypeLait.VACHE);
+		fromageVache2.updateTypeFromage(TypeLait.VACHE);
 		fromages.add(fromageVache1);
 		fromages.add(fromageVache2);
 		fromages.add(fromageVache);
 		articles.addFromages(fromages);
+		
+	}
+	@After
+	public void tearUp() {
+		articles = null;
 		
 	}
 
@@ -53,13 +59,16 @@ public class Test_Filtrage {
 		}
 		assertEquals(fromageFiltré.size(), 3);
 	}
+	
+	@Test
 	public void filtrageChevre() {
 		List<Fromage> fromageFiltré = this.articles.fromagesAuLaitDe(TypeLait.CHEVRE);
 		for (Fromage f : fromageFiltré){
 			assertEquals(f.getTypeFromage(),TypeLait.CHEVRE);
 		}
-		assertEquals(fromageFiltré.size(), 3);
+		assertEquals(3,fromageFiltré.size());
 	}
+	@Test
 	public void filtrageVache() {
 		List<Fromage> fromageFiltré = this.articles.fromagesAuLaitDe(TypeLait.VACHE);
 		for (Fromage f : fromageFiltré){
