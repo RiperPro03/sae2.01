@@ -28,6 +28,10 @@ import java.awt.Color;
 import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class FEN_Accueil {
 	public modele.Articles stock;
@@ -120,6 +124,12 @@ public class FEN_Accueil {
 				
 		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
+		liste_fromage.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				Fromage f = stock.getFromage((String)liste_fromage.getSelectedValue());
+				FEN_Détails_Fromage popUp = new FEN_Détails_Fromage(f);
+			}
+		});
 		liste_fromage.setVisibleRowCount(10);
 		scrollPane_1.setViewportView(liste_fromage);
 	}

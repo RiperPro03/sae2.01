@@ -10,6 +10,9 @@ import java.awt.BorderLayout;
 import javax.swing.JTextArea;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+
+import modele.Fromage;
+
 import javax.swing.JTextPane;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
@@ -23,27 +26,14 @@ import javax.swing.DefaultComboBoxModel;
 public class FEN_Détails_Fromage {
 
 	private JFrame frame;
+	private Fromage fromage;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FEN_Détails_Fromage window = new FEN_Détails_Fromage();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public FEN_Détails_Fromage() {
+	public FEN_Détails_Fromage(Fromage f) {
+		this.fromage = f;
 		initialize();
 	}
 
@@ -71,7 +61,7 @@ public class FEN_Détails_Fromage {
 		détails_du_fromage.add(slider, BorderLayout.EAST);
 		
 		JTextArea information_fromage = new JTextArea();
-		information_fromage.setText("Bon fromage croie le");
+		information_fromage.setText(fromage.getDescription());
 		information_fromage.setEditable(false);
 		détails_du_fromage.add(information_fromage, BorderLayout.CENTER);
 		

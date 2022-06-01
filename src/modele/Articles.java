@@ -103,4 +103,13 @@ public class Articles {
 		return this.totalTTCFacture() / 1.2F ; 
 	}
 	
+	public Fromage getFromage(String désignation) {
+		for(Fromage f : lesFromages) {
+			if(f.getDésignation() == désignation) {
+				return f;
+			}
+		}
+		return null;
+	}
+	
 }
