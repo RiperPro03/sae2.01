@@ -60,4 +60,16 @@ public class Articles {
 		return enForme.toString();
 	}
 	
+	public Fromage fromagesAuLaitDe(TypeLait lait) {
+		return void;
+	}
+	
+	public Fromage getLesFromages() {
+		return void;
+	}
+	
+	public Article getArticle(String désignation, String clé) {
+		return void;
+	}
+	
 }
