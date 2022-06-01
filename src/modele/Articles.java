@@ -60,16 +60,33 @@ public class Articles {
 		return enForme.toString();
 	}
 	
-	public Fromage fromagesAuLaitDe(TypeLait lait) {
-		return void;
+	public List<Fromage> fromagesAuLaitDe(TypeLait lait) {
+		List<Fromage> fromageListType = new LinkedList<Fromage>();
+		for (Fromage f : this.lesFromages) {
+			if (f.getTypeFromage() == lait) {
+				fromageListType.add(f);
+			}
+		}
+		return fromageListType;
 	}
 	
-	public Fromage getLesFromages() {
-		return void;
+	public List<Fromage> getLesFromages() {
+		return this.lesFromages;
 	}
 	
 	public Article getArticle(String désignation, String clé) {
-		return void;
+		Article articleR = null;
+		for (Fromage f: this.lesFromages) {
+			if (f.getDésignation() == désignation) {
+				for (Article a : f.getArticles()) {
+					if (a.getClé() == clé) {
+						articleR = a;
+					}
+				}
+			}
+		}
+		assert(articleR == null) : "erreur";
+		return null;
 	}
 	
 }

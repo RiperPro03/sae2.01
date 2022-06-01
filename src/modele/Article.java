@@ -51,11 +51,11 @@ public class Article {
 	}
 	
 	public void préempterQuantité(int quantité) {
-		
+		this.quantitéEnStock -= quantité;
 	}
 	
 	public void rendreQuantité(int quantité) {
-		
+		this.quantitéEnStock += quantité;
 	}
 	
 	public String toStringIHM() {
