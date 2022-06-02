@@ -108,7 +108,13 @@ public class FEN_Panier {
 		Bouton1 = new JButton("Commander");
 		Bouton1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(FEN_Panier.panier);
+				System.out.println(FEN_Panier.panier); // avoir le panier
+				for (Article a : FEN_Panier.panier) {
+					System.out.println(a.getQuantitéEnStock()); // avoir la quantité d'un article dans le panier
+				}
+				for (Article a : FEN_Panier.panier) {
+					System.out.println(FEN_Accueil.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).getQuantitéEnStock()); // avoir la quantité d'un article dans le stock
+				}
 			}
 		});
 		Bouton1.setForeground(Color.BLACK);

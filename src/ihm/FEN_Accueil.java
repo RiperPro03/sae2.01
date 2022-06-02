@@ -34,7 +34,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class FEN_Accueil {
-	public modele.Articles stock;
+	public static modele.Articles stock;
 	
 	
 	
@@ -46,7 +46,7 @@ public class FEN_Accueil {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

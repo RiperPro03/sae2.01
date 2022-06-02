@@ -104,31 +104,7 @@ public class FEN_Détails_Fromage {
 		FOOTER.add(South_South);
 		
 		JButton btn_ajouter_panier = new JButton("Ajouter au panier");
-		btn_ajouter_panier.addMouseListener(new MouseAdapter() {		// PAS TERMINER
-			public void mouseClicked(MouseEvent e) {
-				
-				if (comboBox.getSelectedItem() == "1 kg") {
-					FEN_Panier.launch(); // Pour le test que lorsqu'on choisie 1kg ça execute la commande
-				}
-				int spVal = (int) spinner_nb_fromage.getValue();
-				if (spVal == 10) {
-					FEN_Info_Facturation.launch(); // Pour le test que lorsqu'on choisie 10 en quantité ça execute la commande
-				}
-				
-				Article choix = null;
-				for (Article a : fromage.getArticles()) {
-					if (a.getClé() == comboBox.getSelectedItem()) {
-						choix = a;
-					}
-				}
-				if ((int)spinner_nb_fromage.getValue() <= choix.getQuantitéEnStock()) {
-					choix.setQuantitéEnStock(choix.getQuantitéEnStock() - spVal);
-					FEN_Panier.panier.add(choix);
-					
-				}
-				
-			}
-		});
+		addPanier(comboBox, spinner_nb_fromage, btn_ajouter_panier);
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
 		South_South.add(btn_ajouter_panier);
@@ -138,6 +114,44 @@ public class FEN_Détails_Fromage {
 		eventClose(btn_annuler_ajout);
 		btn_annuler_ajout.setBackground(new Color(255, 69, 0));
 		South_South.add(btn_annuler_ajout);
+	}
+
+
+	private void addPanier(JComboBox comboBox, JSpinner spinner_nb_fromage, JButton btn_ajouter_panier) {
+		btn_ajouter_panier.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				int spVal = (int) spinner_nb_fromage.getValue();
+				Article choix = null;
+				for (Article a : fromage.getArticles()) {
+					if (a.getClé() == comboBox.getSelectedItem()) {
+						choix = FEN_Accueil.stock.getArticle(fromage.getDésignation(), a.getClé());
+						
+					}
+				}
+				if ((int)spinner_nb_fromage.getValue() <= choix.getQuantitéEnStock()) {
+					choix.préempterQuantité(spVal);
+					
+					if(FEN_Panier.panier.size() == 0) {
+						Article articleAdd = new Article(choix.getFromage(),choix.getClé(),choix.getPrixTTC());
+						articleAdd.rendreQuantité(spVal);
+						FEN_Panier.panier.add(articleAdd);
+					} else {
+						boolean x = false;
+						for (int i = 0; i < FEN_Panier.panier.size(); i++) {
+							if (FEN_Panier.panier.get(i).equals(choix)) {
+								x = true;
+								FEN_Panier.panier.get(i).rendreQuantité(spVal);
+							}
+						}
+						if(!x) {
+							Article articleAdd = new Article(choix.getFromage(),choix.getClé(),choix.getPrixTTC());
+							articleAdd.rendreQuantité(spVal);
+							FEN_Panier.panier.add(articleAdd);
+						}
+					}
+				}
+			}
+		});
 	}
 
 
