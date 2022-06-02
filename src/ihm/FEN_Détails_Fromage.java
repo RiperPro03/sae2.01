@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
+import modele.Article;
 import modele.Fromage;
 
 import javax.swing.JTextPane;
@@ -105,12 +106,27 @@ public class FEN_Détails_Fromage {
 		JButton btn_ajouter_panier = new JButton("Ajouter au panier");
 		btn_ajouter_panier.addMouseListener(new MouseAdapter() {		// PAS TERMINER
 			public void mouseClicked(MouseEvent e) {
+				
 				if (comboBox.getSelectedItem() == "1 kg") {
 					FEN_Panier.launch(); // Pour le test que lorsqu'on choisie 1kg ça execute la commande
 				}
-				if ((int)spinner_nb_fromage.getValue() == 10) {
+				int spVal = (int) spinner_nb_fromage.getValue();
+				if (spVal == 10) {
 					FEN_Info_Facturation.launch(); // Pour le test que lorsqu'on choisie 10 en quantité ça execute la commande
 				}
+				
+				Article choix = null;
+				for (Article a : fromage.getArticles()) {
+					if (a.getClé() == comboBox.getSelectedItem()) {
+						choix = a;
+					}
+				}
+				if ((int)spinner_nb_fromage.getValue() <= choix.getQuantitéEnStock()) {
+					choix.setQuantitéEnStock(choix.getQuantitéEnStock() - spVal);
+					FEN_Panier.panier.add(choix);
+					
+				}
+				
 			}
 		});
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));

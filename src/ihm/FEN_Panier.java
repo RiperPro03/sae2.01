@@ -17,11 +17,15 @@ import javax.swing.DropMode;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
+import java.util.LinkedList;
+import java.util.List;
 import java.awt.CardLayout;
 import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FEN_Panier {
 
@@ -38,7 +42,9 @@ public class FEN_Panier {
 	private JButton Bouton2;
 	private JButton Bouton3;
 	private JLabel titrePanier;
-
+	
+	
+	public static List<Article> panier = new LinkedList<Article>();
 	
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
@@ -100,6 +106,11 @@ public class FEN_Panier {
 		South.add(South3);
 		
 		Bouton1 = new JButton("Commander");
+		Bouton1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(FEN_Panier.panier);
+			}
+		});
 		Bouton1.setForeground(Color.BLACK);
 		Bouton1.setBackground(Color.GREEN);
 		South3.add(Bouton1);

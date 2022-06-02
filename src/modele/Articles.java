@@ -86,7 +86,7 @@ public class Articles {
 			}
 		}
 		assert(articleR == null) : "erreur";
-		return null;
+		return articleR;
 	}
 	
 	public float totalTTCFacture() {

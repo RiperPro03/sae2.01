@@ -35,7 +35,8 @@ import javax.swing.event.ListSelectionEvent;
 
 public class FEN_Accueil {
 	public modele.Articles stock;
-	public modele.Articles panier;
+	
+	
 	
 	private JFrame frame;
 	private JTextField txtFromageQuiRit;
@@ -95,6 +96,11 @@ public class FEN_Accueil {
 		txtFromageQuiRit.setColumns(1);
 		
 		JButton btn_panier = new JButton("indic_panier");
+		btn_panier.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FEN_Panier.launch();
+			}
+		});
 		header.add(btn_panier);
 		
 		JPanel sélection_type = new JPanel();
@@ -125,7 +131,6 @@ public class FEN_Accueil {
 		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
 		liste_fromage.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				Fromage f = stock.getFromage((String)liste_fromage.getSelectedValue());
 				FEN_Détails_Fromage.launch(f);
