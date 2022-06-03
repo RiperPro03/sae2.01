@@ -58,7 +58,7 @@ public class FEN_Détails_Fromage {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); // HIDE_ON_CLOSE pour juste fermer cette fenetre
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		
@@ -72,14 +72,10 @@ public class FEN_Détails_Fromage {
 		frame.getContentPane().add(détails_du_fromage);
 		détails_du_fromage.setLayout(new BorderLayout(0, 0));
 		
-		JSlider slider = new JSlider();
-		slider.setOrientation(SwingConstants.VERTICAL);
-		détails_du_fromage.add(slider, BorderLayout.EAST);
-		
-		JTextArea information_fromage = new JTextArea();
-		information_fromage.setText(fromage.getDescription());
-		information_fromage.setEditable(false);
-		détails_du_fromage.add(information_fromage, BorderLayout.CENTER);
+		JTextPane textPane = new JTextPane();
+		textPane.setText(fromage.getDescription());
+		textPane.setEditable(false);
+		détails_du_fromage.add(textPane, BorderLayout.NORTH);
 		
 		JPanel FOOTER = new JPanel();
 		frame.getContentPane().add(FOOTER);
