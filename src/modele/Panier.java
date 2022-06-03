@@ -66,12 +66,16 @@ public class Panier {
 			this.total += a.getPrixTTC() * a.getQuantitéEnStock();
 		}
 	}
-
 	
+	public ModeLivraison getLivreur() {
+		return livreur;
+	}
+
 	public void setModeLivraison(ModeLivraison e) {
 		this.livreur = e;
 		this.updateTotal();
 	}
+	
 	public String[] listIHM(){
 		String[] result = new String[panier.size()+3]; 
 		result[0] = "Produit \t\t\t Prix unitaire \t\t Qté \t\t Total";
@@ -84,6 +88,7 @@ public class Panier {
 		
 		
 	}
+	
 	public void viderPanier(Articles stock) {
 		assert panier.size()>0 : "Votre panier est déjà vide";
 		for(Article a : panier) {
