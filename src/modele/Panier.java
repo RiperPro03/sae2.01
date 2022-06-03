@@ -15,7 +15,13 @@ public class Panier {
 		panier = new LinkedList<Article>(); 
 		livreur = ModeLivraison.COLISSIMO;
 	}
-	public int getTotal() {
+	
+	
+	public List<Article> getList() {
+		return this.panier;
+	}
+	
+	public float getTotal() {
 		return total;
 	}
 
@@ -24,14 +30,24 @@ public class Panier {
 		if(quantité<=0) {
 			return;
 		}
-				int index = getIndex(a, quantité);
-				if(index > 0) {
-					panier.get(index).rendreQuantité(quantité);
-				}else {
-					Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
-					articleAdd.rendreQuantité(quantité);
-					FEN_Panier.panier.add(articleAdd);
+		if(panier.size() == 0) {
+			Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
+			articleAdd.rendreQuantité(quantité);
+			panier.add(articleAdd);
+		} else {
+			boolean x = false;
+			for (int i = 0; i < panier.size(); i++) {
+				if (panier.get(i).equals(a)) {
+					x = true;
+					panier.get(i).rendreQuantité(quantité);
+				}
 			}
+			if(!x) {
+				Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
+				articleAdd.rendreQuantité(quantité);
+				panier.add(articleAdd);
+			}
+		}
 				this.updateTotal();
 	}
 	private void updateTotal() {
@@ -41,14 +57,7 @@ public class Panier {
 		}
 	}
 
-	private int getIndex(Article a, int quantité) {
-		for (int i = 0; i < FEN_Panier.panier.size(); i++) {
-			if (panier.get(i).equals(a)) {
-				return i;
-			}
-		}
-		return -1;
-	}
+	
 	public void setModeLivraison(ModeLivraison e) {
 		this.livreur = e;
 	}

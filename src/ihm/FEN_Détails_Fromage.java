@@ -120,7 +120,8 @@ public class FEN_Détails_Fromage {
 	private void addPanier(JComboBox comboBox, JSpinner spinner_nb_fromage, JButton btn_ajouter_panier) {
 		btn_ajouter_panier.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				int spVal = (int) spinner_nb_fromage.getValue();
+				
+				int spVal = (int) spinner_nb_fromage.getValue(); // récupérer la valeur du spinner
 				Article choix = null;
 				for (Article a : fromage.getArticles()) {
 					if (a.getClé() == comboBox.getSelectedItem()) {
@@ -128,27 +129,9 @@ public class FEN_Détails_Fromage {
 						
 					}
 				}
-				if ((int)spinner_nb_fromage.getValue() <= choix.getQuantitéEnStock()) {
-					choix.préempterQuantité(spVal);
-					
-					if(FEN_Panier.panier.size() == 0) {
-						Article articleAdd = new Article(choix.getFromage(),choix.getClé(),choix.getPrixTTC());
-						articleAdd.rendreQuantité(spVal);
-						FEN_Panier.panier.add(articleAdd);
-					} else {
-						boolean x = false;
-						for (int i = 0; i < FEN_Panier.panier.size(); i++) {
-							if (FEN_Panier.panier.get(i).equals(choix)) {
-								x = true;
-								FEN_Panier.panier.get(i).rendreQuantité(spVal);
-							}
-						}
-						if(!x) {
-							Article articleAdd = new Article(choix.getFromage(),choix.getClé(),choix.getPrixTTC());
-							articleAdd.rendreQuantité(spVal);
-							FEN_Panier.panier.add(articleAdd);
-						}
-					}
+				if (spVal <= choix.getQuantitéEnStock() && spVal > 0) {
+					Main.panier.addArticle(choix, spVal);
+					frame.setVisible(false);
 				}
 			}
 		});

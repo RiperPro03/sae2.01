@@ -43,9 +43,6 @@ public class FEN_Panier {
 	private JButton Bouton3;
 	private JLabel titrePanier;
 	
-	
-	public static List<Article> panier = new LinkedList<Article>();
-	
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -108,11 +105,11 @@ public class FEN_Panier {
 		Bouton1 = new JButton("Commander");
 		Bouton1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(FEN_Panier.panier); // avoir le panier
-				for (Article a : FEN_Panier.panier) {
+				System.out.println(Main.panier.getList()); // avoir le panier
+				for (Article a : Main.panier.getList()) {
 					System.out.println(a.getQuantitéEnStock()); // avoir la quantité d'un article dans le panier
 				}
-				for (Article a : FEN_Panier.panier) {
+				for (Article a : Main.panier.getList()) {
 					System.out.println(FEN_Accueil.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).getQuantitéEnStock()); // avoir la quantité d'un article dans le stock
 				}
 			}

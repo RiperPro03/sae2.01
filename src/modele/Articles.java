@@ -89,20 +89,6 @@ public class Articles {
 		return articleR;
 	}
 	
-	public float totalTTCFacture() {
-		int total = 0;
-		for(Fromage f : lesFromages) {
-			for(Article a : f.getArticles()) {
-				total += a.getPrixTTC() * a.getQuantitéEnStock();
-			}
-		}
-		return total;
-	}
-	
-	public float totalHTFacture() {
-		return this.totalTTCFacture() / 1.2F ; 
-	}
-	
 	public Fromage getFromage(String désignation) {
 		for(Fromage f : lesFromages) {
 			if(f.getDésignation() == désignation) {
