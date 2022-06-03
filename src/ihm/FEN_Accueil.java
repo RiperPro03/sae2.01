@@ -1,14 +1,9 @@
 package ihm;
-
-import modele.*;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -19,19 +14,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import modele.Fromage;
+import modele.TypeLait;
+
 import java.awt.Font;
 import java.awt.Component;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
-import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
 
 public class FEN_Accueil {
 	

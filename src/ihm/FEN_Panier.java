@@ -1,6 +1,5 @@
 package ihm;
 
-import modele.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,29 +9,20 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
+
+import modele.Article;
 import javax.swing.JLabel;
-import javax.swing.DropMode;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 
 import java.awt.GridLayout;
-import java.util.LinkedList;
-import java.util.List;
-import java.awt.CardLayout;
-import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 
 public class FEN_Panier {
 
@@ -143,10 +133,12 @@ public class FEN_Panier {
 		South3.add(Bouton1);
 		
 		Bouton2 = new JButton("Vider le panier");
+		Bouton2.addMouseListener(viderPanier());
 		Bouton2.setBackground(Color.RED);
 		South3.add(Bouton2);
 		
 		Bouton3 = new JButton("Continuer les achats");
+		Bouton3.addMouseListener(closeFEN());
 		Bouton3.setForeground(Color.WHITE);
 		Bouton3.setBackground(Color.BLUE);
 		South3.add(Bouton3);
@@ -167,7 +159,7 @@ public class FEN_Panier {
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				true, true, false, true
+				false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -178,6 +170,23 @@ public class FEN_Panier {
 		
 		
 		scrollPane.setViewportView(table);
+	}
+
+	private MouseAdapter closeFEN() {
+		return new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+			}
+		};
+	}
+
+	private MouseAdapter viderPanier() {
+		return new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Main.panier.viderPanier(Main.stock);
+				updatePanier();
+			}
+		};
 	}
 
 	private String[] listeLivreur() {

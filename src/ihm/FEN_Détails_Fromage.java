@@ -7,17 +7,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import javax.swing.JTextArea;
-import javax.swing.JSlider;
-import javax.swing.SwingConstants;
-
 import modele.Article;
 import modele.Fromage;
 
 import javax.swing.JTextPane;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
-import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
