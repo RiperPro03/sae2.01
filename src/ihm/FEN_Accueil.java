@@ -126,7 +126,6 @@ public class FEN_Accueil {
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		frame.getContentPane().add(scrollPane_1);
-		
 				
 		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
