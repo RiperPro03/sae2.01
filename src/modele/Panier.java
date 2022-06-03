@@ -30,14 +30,10 @@ public class Panier {
 		if(quantité <= 0) {
 			return;
 		}
-		if(panier.isEmpty()) {
-			addAList(a, quantité);
+		if (panier.contains(a)) {
+			panier.get(panier.indexOf(a)).rendreQuantité(quantité);
 		} else {
-			if (panier.contains(a)) {
-				panier.get(panier.indexOf(a)).rendreQuantité(quantité);
-			} else {
-				addAList(a, quantité);
-			}
+			addAList(a, quantité);
 		}
 		this.updateTotal();
 	}
