@@ -34,9 +34,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class FEN_Accueil {
-	public static modele.Articles stock;
-	
-	
 	
 	private JFrame frame;
 	private JTextField txtFromageQuiRit;
@@ -63,7 +60,6 @@ public class FEN_Accueil {
 	 * Create the application.
 	 */
 	public FEN_Accueil() {
-		stock = modele.GenerationFromages.générationBaseFromages();
 		initialize();
 	}
 
@@ -127,11 +123,11 @@ public class FEN_Accueil {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		frame.getContentPane().add(scrollPane_1);
 				
-		fromagesListeDs = afficherFromagesAccueil(stock.getLesFromages());
+		fromagesListeDs = afficherFromagesAccueil(Main.stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
 		liste_fromage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				Fromage f = stock.getFromage((String)liste_fromage.getSelectedValue());
+				Fromage f = Main.stock.getFromage((String)liste_fromage.getSelectedValue());
 				FEN_Détails_Fromage.launch(f);
 				
 			}
@@ -143,7 +139,7 @@ public class FEN_Accueil {
 	public void affichageTout(JButton btn_tout_fromage) {
 		btn_tout_fromage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				updateListeFromageAccueil(stock.getLesFromages());
+				updateListeFromageAccueil(Main.stock.getLesFromages());
 			}
 		});
 	}
@@ -151,7 +147,7 @@ public class FEN_Accueil {
 	public void filtre(JButton btn_fromage_brebis,modele.TypeLait lait) {
 		btn_fromage_brebis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FEN_Accueil.this.updateListeFromageAccueil(stock.fromagesAuLaitDe(lait));
+				FEN_Accueil.this.updateListeFromageAccueil(Main.stock.fromagesAuLaitDe(lait));
 			}
 		});
 	}

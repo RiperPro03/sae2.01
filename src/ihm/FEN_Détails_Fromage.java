@@ -125,7 +125,7 @@ public class FEN_Détails_Fromage {
 				Article choix = null;
 				for (Article a : fromage.getArticles()) {
 					if (a.getClé() == comboBox.getSelectedItem()) {
-						choix = FEN_Accueil.stock.getArticle(fromage.getDésignation(), a.getClé());
+						choix = Main.stock.getArticle(fromage.getDésignation(), a.getClé());
 						
 					}
 				}
