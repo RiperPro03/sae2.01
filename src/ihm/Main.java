@@ -14,9 +14,9 @@ public class Main {
 	public static modele.Articles stock;
 
 	public static void main(String[] args) {
-		FEN_Accueil.launch();
 		panier = new Panier();
 		stock = modele.GenerationFromages.générationBaseFromages();
+		FEN_Accueil.launch();
 
 	}
 

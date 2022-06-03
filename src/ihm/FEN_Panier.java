@@ -109,12 +109,13 @@ public class FEN_Panier {
 		Bouton1 = new JButton("Commander");
 		Bouton1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println(Main.panier.getList()); // avoir le panier
+				System.out.println("Panier : ");
 				for (Article a : Main.panier.getList()) {
-					System.out.println(a.getQuantitéEnStock()); // avoir la quantité d'un article dans le panier
+					System.out.println(a.toStringAvecStock()); // avoir la quantité d'un article dans le panier
 				}
+				System.out.println("Stock : ");
 				for (Article a : Main.panier.getList()) {
-					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).getQuantitéEnStock()); // avoir la quantité d'un article dans le stock
+					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).toStringAvecStock()); // avoir la quantité d'un article dans le stock
 				}
 				
 				modele.GenFacture facture = new modele.GenFacture(Main.panier);

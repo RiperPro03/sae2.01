@@ -58,7 +58,7 @@ public class Article {
 		this.quantitéEnStock += quantité;
 	}
 	
-	public String toStringIHM() {
+	public String toStringIHM() { 	//à FAIRE
 		return "void";
 	}
 	
