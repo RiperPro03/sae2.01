@@ -39,12 +39,9 @@ public class Panier {
 		} else {
 			addAList(a, quantité);
 		}
-<<<<<<< HEAD
 		a.préempterQuantité(quantité);
 		this.updateTotal();
-=======
 		this.updateTotalSansLivraison();
->>>>>>> branch 'master' of https://github.com/RiperPro03/sae2.01
 	}
 
 
@@ -56,16 +53,13 @@ public class Panier {
 	
 	private void updateTotal() {
 		this.total = livreur.getPrix();
-<<<<<<< HEAD
 
 		if(panier.size()==0)
 			return;
-=======
 		updateTotalSansLivraison();
 	}
 	
 	private void updateTotalSansLivraison() {
->>>>>>> branch 'master' of https://github.com/RiperPro03/sae2.01
 		for (Article a : panier) {
 			this.total += a.getPrixTTC() * a.getQuantitéEnStock();
 		}
