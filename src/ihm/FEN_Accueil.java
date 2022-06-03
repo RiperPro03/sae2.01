@@ -74,11 +74,11 @@ public class FEN_Accueil {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
 		JPanel header = new JPanel();
 		header.setBorder(null);
-		frame.getContentPane().add(header);
+		frame.getContentPane().add(header, BorderLayout.NORTH);
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		
 		JLabel image_header = new JLabel("Attente image");
@@ -105,7 +105,7 @@ public class FEN_Accueil {
 		
 		JPanel sélection_type = new JPanel();
 		sélection_type.setBorder(null);
-		frame.getContentPane().add(sélection_type);
+		frame.getContentPane().add(sélection_type, BorderLayout.SOUTH);
 		sélection_type.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		JButton btn_tout_fromage = new JButton("Tout");
