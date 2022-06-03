@@ -20,6 +20,7 @@ import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SpinnerNumberModel;
 
 public class FEN_Détails_Fromage {
 
@@ -87,6 +88,7 @@ public class FEN_Détails_Fromage {
 		South_North.add(comboBox);
 		
 		JSpinner spinner_nb_fromage = new JSpinner();
+		spinner_nb_fromage.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
 		South_North.add(spinner_nb_fromage);
 		
 		JPanel South_South = new JPanel();
