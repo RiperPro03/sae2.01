@@ -11,29 +11,28 @@ import ihm.FEN_Accueil;
 public class GenFacture {
 	
 	Panier panier;
-	File f = new File("./facture/fac.txt");
 	
 	public GenFacture(Panier p) {
 		this.panier = p;
 	}
 	
-	public void genFac() {
+	public void genFac(String nomF) {
+		String chemin = "./";
+		chemin += nomF + ".txt";
+		File f = new File(chemin);
 		if (!f.exists()) {
 			try {
 				f.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
 				FileWriter fw = new FileWriter(f);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write("test");
 				bw.close();
 				fw.close();
 			} catch (IOException e) {
-				e.printStackTrace(); 
+				e.printStackTrace();
 			}
+		} else {
+			System.out.println("facture deja existant");
 			
 		}
 	}
