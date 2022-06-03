@@ -29,6 +29,8 @@ public class GenFacture {
 				FileWriter fw = new FileWriter(f);
 				BufferedWriter bw = new BufferedWriter(fw);
 				bw.write("test");
+				bw.close();
+				fw.close();
 			} catch (IOException e) {
 				e.printStackTrace(); 
 			}
