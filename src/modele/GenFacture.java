@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import ihm.FEN_Accueil;
+import ihm.Main;
 
 public class GenFacture {
 	
@@ -25,11 +26,19 @@ public class GenFacture {
 				f.createNewFile();
 				FileWriter fw = new FileWriter(f);
 				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write("test");
+				bw.write(panier.getList().toString()); // affichage brute du panier
+				bw.newLine();
+				for (Article a : panier.getList()) {  // affichage de la quantité par fromage
+					String strF = a.getFromage().getDésignation() + " : " + a.getQuantitéEnStock() + "[" + a.getPrixTTC() + "]";
+					bw.write(strF);
+					bw.newLine();
+				}
+				String strT = "Total = " + panier.getTotal() + "€";
+				bw.write(strT);
 				bw.close();
 				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		} else {
 			System.out.println("facture deja existant");
