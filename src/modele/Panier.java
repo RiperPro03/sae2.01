@@ -35,7 +35,7 @@ public class Panier {
 		} else {
 			addAList(a, quantité);
 		}
-		this.updateTotal();
+		this.updateTotalSansLivraison();
 	}
 
 
@@ -47,6 +47,10 @@ public class Panier {
 	
 	private void updateTotal() {
 		this.total = livreur.getPrix();
+		updateTotalSansLivraison();
+	}
+	
+	private void updateTotalSansLivraison() {
 		for (Article a : panier) {
 			this.total += a.getPrixTTC() * a.getQuantitéEnStock();
 		}

@@ -26,6 +26,10 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class FEN_Panier {
 
@@ -112,6 +116,33 @@ public class FEN_Panier {
 				for (Article a : Main.panier.getList()) {
 					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).getQuantitéEnStock()); // avoir la quantité d'un article dans le stock
 				}
+				
+				String chemin = "./";
+				chemin += "test" + ".txt";
+				File f = new File(chemin);
+				if (!f.exists()) {
+					try {
+						f.createNewFile();
+						FileWriter fw = new FileWriter(f);
+						BufferedWriter bw = new BufferedWriter(fw);
+						for (Article a : Main.panier.getList()) {  // affichage de la quantité par fromage
+							String strF = a.getFromage().getDésignation() + " (" + a.getClé() + ") : " + a.getQuantitéEnStock() + " [" + a.getPrixTTC() + "€]";
+							bw.write(strF);
+							bw.newLine();
+						}
+						String strT = "Total = " + Main.panier.getTotal() + "€";
+						bw.write(strT);
+						bw.close();
+						fw.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				} else {
+					System.out.println("facture deja existant");
+					
+				}
+
+				
 			}
 		});
 		Bouton1.setForeground(Color.BLACK);
