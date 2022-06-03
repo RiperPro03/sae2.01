@@ -81,11 +81,12 @@ public class Articles {
 				for (Article a : f.getArticles()) {
 					if (a.getClé() == clé) {
 						articleR = a;
+						return articleR;
 					}
 				}
 			}
 		}
-		assert(articleR == null) : "erreur";
+		assert(articleR != null) : "erreur";
 		return articleR;
 	}
 	

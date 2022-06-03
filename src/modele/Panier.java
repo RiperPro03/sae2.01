@@ -14,6 +14,7 @@ public class Panier {
 	public Panier () {
 		panier = new LinkedList<Article>(); 
 		livreur = ModeLivraison.COLISSIMO;
+		total = livreur.getPrix();
 	}
 	
 	
@@ -24,9 +25,12 @@ public class Panier {
 	public float getTotal() {
 		return total;
 	}
+	public List<Article> getPanier(){
+		return panier;
+	}
 
 	public void addArticle(Article a,int quantité) {
-		assert (quantité >= a.getQuantitéEnStock()):"Quantité demandé trop grande";
+		assert (quantité <= a.getQuantitéEnStock()):"Quantité demandée trop grande";
 		if(quantité <= 0) {
 			return;
 		}
@@ -39,6 +43,7 @@ public class Panier {
 				addAList(a, quantité);
 			}
 		}
+		a.préempterQuantité(quantité);
 		this.updateTotal();
 	}
 
@@ -51,6 +56,9 @@ public class Panier {
 	
 	private void updateTotal() {
 		this.total = livreur.getPrix();
+
+		if(panier.size()==0)
+			return;
 		for (Article a : panier) {
 			this.total += a.getPrixTTC() * a.getQuantitéEnStock();
 		}
@@ -59,6 +67,7 @@ public class Panier {
 	
 	public void setModeLivraison(ModeLivraison e) {
 		this.livreur = e;
+		this.updateTotal();
 	}
 	public String[] listIHM(){
 		String[] result = new String[panier.size()+3]; 
@@ -71,6 +80,17 @@ public class Panier {
 		return result;
 		
 		
+	}
+	public void viderPanier(Articles stock) {
+		assert panier.size()>0 : "Votre panier est déjà vide";
+		for(Article a : panier) {
+			stock.getArticle(a.getFromage().getDésignation(),a.getClé()).rendreQuantité(a.getQuantitéEnStock());
+		}
+		panier.clear();
+		
+	}
+	public void commander() {
+		panier.clear();
 	}
 		
 	}
