@@ -191,9 +191,9 @@ public class FEN_Panier {
 
 	private String[] listeLivreur() {
 		String[] listeOption = new String[3];
-		listeOption[0] = "COLISSIMO";
-		listeOption[1] = "DHL";
-		listeOption[2] = "MONDIAL_RELAI";
+		for (int i = 0; i < modele.ModeLivraison.getAllValues().size(); i++) {
+			listeOption[i] = modele.ModeLivraison.getAllValues().get(i);
+		}
 		return listeOption;
 	}
 
