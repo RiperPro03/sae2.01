@@ -27,29 +27,28 @@ public class Panier {
 
 	public void addArticle(Article a,int quantité) {
 		assert (quantité >= a.getQuantitéEnStock()):"Quantité demandé trop grande";
-		if(quantité<=0) {
+		if(quantité <= 0) {
 			return;
 		}
-		if(panier.size() == 0) {
-			Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
-			articleAdd.rendreQuantité(quantité);
-			panier.add(articleAdd);
+		if(panier.isEmpty()) {
+			addAList(a, quantité);
 		} else {
-			boolean x = false;
-			for (int i = 0; i < panier.size(); i++) {
-				if (panier.get(i).equals(a)) {
-					x = true;
-					panier.get(i).rendreQuantité(quantité);
-				}
-			}
-			if(!x) {
-				Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
-				articleAdd.rendreQuantité(quantité);
-				panier.add(articleAdd);
+			if (panier.contains(a)) {
+				panier.get(panier.indexOf(a)).rendreQuantité(quantité);
+			} else {
+				addAList(a, quantité);
 			}
 		}
-				this.updateTotal();
+		this.updateTotal();
 	}
+
+
+	private void addAList(Article a, int quantité) {
+		Article articleAdd = new Article(a.getFromage(),a.getClé(),a.getPrixTTC());
+		articleAdd.rendreQuantité(quantité);
+		panier.add(articleAdd);
+	}
+	
 	private void updateTotal() {
 		this.total = livreur.getPrix();
 		for (Article a : panier) {

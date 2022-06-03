@@ -1,5 +1,11 @@
 package ihm;
 import modele.Panier;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import modele.Articles;
 
 public class Main {
