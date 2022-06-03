@@ -26,7 +26,7 @@ public enum ModeLivraison {
 		}
 		return result;
 	}
-	public ModeLivraison getPrix(String value) {
+	public ModeLivraison getModeLivraison(String value) {
 		for(ModeLivraison m : ModeLivraison.values()) {
 			if(m.toString() == value) {
 				return m;
