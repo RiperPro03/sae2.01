@@ -11,7 +11,7 @@ import ihm.Main;
 
 public class GenFacture {
 	
-	Panier panier;
+	private Panier panier;
 	
 	public GenFacture(Panier p) {
 		this.panier = p;
@@ -26,12 +26,12 @@ public class GenFacture {
 				f.createNewFile();
 				FileWriter fw = new FileWriter(f);
 				BufferedWriter bw = new BufferedWriter(fw);
-				for (Article a : Main.panier.getList()) {
+				for (Article a : panier.getList()) {
 					String strF = a.getFromage().getDésignation() + " (" + a.getClé() + ") : " + a.getQuantitéEnStock() + " [" + a.getPrixTTC() + "€]";
 					bw.write(strF);
 					bw.newLine();
 				}
-				String strT = "Total = " + Main.panier.getTotal() + "€";
+				String strT = "Total = " + panier.getTotal() + "€";
 				bw.write(strT);
 				bw.close();
 				fw.close();
