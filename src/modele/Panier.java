@@ -56,7 +56,7 @@ public class Panier {
 	private void updateTotal() {
 		this.total = livreur.getPrix();
 
-		if(panier.size()==0)
+		if(panier.isEmpty())
 			return;
 		updateTotalSansLivraison();
 	}

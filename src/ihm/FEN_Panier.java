@@ -117,30 +117,8 @@ public class FEN_Panier {
 					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).getQuantitéEnStock()); // avoir la quantité d'un article dans le stock
 				}
 				
-				String chemin = "./";
-				chemin += "test" + ".txt";
-				File f = new File(chemin);
-				if (!f.exists()) {
-					try {
-						f.createNewFile();
-						FileWriter fw = new FileWriter(f);
-						BufferedWriter bw = new BufferedWriter(fw);
-						for (Article a : Main.panier.getList()) {  // affichage de la quantité par fromage
-							String strF = a.getFromage().getDésignation() + " (" + a.getClé() + ") : " + a.getQuantitéEnStock() + " [" + a.getPrixTTC() + "€]";
-							bw.write(strF);
-							bw.newLine();
-						}
-						String strT = "Total = " + Main.panier.getTotal() + "€";
-						bw.write(strT);
-						bw.close();
-						fw.close();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				} else {
-					System.out.println("facture deja existant");
-					
-				}
+				modele.GenFacture facture = new modele.GenFacture(Main.panier);
+				facture.genFac("test");
 
 				
 			}

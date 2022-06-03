@@ -26,14 +26,12 @@ public class GenFacture {
 				f.createNewFile();
 				FileWriter fw = new FileWriter(f);
 				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write(panier.getList().toString()); // affichage brute du panier
-				bw.newLine();
-				for (Article a : panier.getList()) {  // affichage de la quantité par fromage
-					String strF = a.getFromage().getDésignation() + " : " + a.getQuantitéEnStock() + "[" + a.getPrixTTC() + "]";
+				for (Article a : Main.panier.getList()) {
+					String strF = a.getFromage().getDésignation() + " (" + a.getClé() + ") : " + a.getQuantitéEnStock() + " [" + a.getPrixTTC() + "€]";
 					bw.write(strF);
 					bw.newLine();
 				}
-				String strT = "Total = " + panier.getTotal() + "€";
+				String strT = "Total = " + Main.panier.getTotal() + "€";
 				bw.write(strT);
 				bw.close();
 				fw.close();
