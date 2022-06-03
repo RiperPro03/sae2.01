@@ -1,43 +1,34 @@
 package ihm;
 
-import modele.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
+
+import modele.Article;
 import javax.swing.JLabel;
-import javax.swing.DropMode;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+
 import java.awt.GridLayout;
-import java.util.LinkedList;
-import java.util.List;
-import java.awt.CardLayout;
-import javax.swing.JSlider;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.swing.JScrollPane;
 
 public class FEN_Panier {
 
 	private JFrame frame;
 	private JPanel South;
 	private JPanel Center;
-	private JTable table;
-	private JSlider slider;
 	private JPanel South2;
 	private JComboBox comboBox;
 	private JTextField txtModeDeLivraison;
@@ -46,6 +37,9 @@ public class FEN_Panier {
 	private JButton Bouton2;
 	private JButton Bouton3;
 	private JLabel titrePanier;
+	private JScrollPane scrollPane;
+	private JTable table;
+	private JButton refreshBTN;
 	
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
@@ -72,7 +66,7 @@ public class FEN_Panier {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JPanel North = new JPanel();
@@ -99,7 +93,17 @@ public class FEN_Panier {
 		txtModeDeLivraison.setColumns(10);
 		
 		comboBox = new JComboBox();
+		String[] listeOption = listeLivreur();
+		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		South2.add(comboBox);
+		
+		refreshBTN = new JButton("Refresh");
+		refreshBTN.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				updatePanier();
+			}
+		});
+		South2.add(refreshBTN);
 		
 		South3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) South3.getLayout();
@@ -129,10 +133,13 @@ public class FEN_Panier {
 		South3.add(Bouton1);
 		
 		Bouton2 = new JButton("Vider le panier");
+		Bouton2.addMouseListener(viderPanier());
 		Bouton2.setBackground(Color.RED);
 		South3.add(Bouton2);
 		
 		Bouton3 = new JButton("Continuer les achats");
+		Bouton3.addMouseListener(closeFEN());
+		Bouton3.setForeground(Color.WHITE);
 		Bouton3.setBackground(Color.BLUE);
 		South3.add(Bouton3);
 		
@@ -140,27 +147,71 @@ public class FEN_Panier {
 		frame.getContentPane().add(Center, BorderLayout.CENTER);
 		Center.setLayout(new BoxLayout(Center, BoxLayout.X_AXIS));
 		
+		scrollPane = new JScrollPane();
+		Center.add(scrollPane);
+		
 		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"Produits", "Prix", "Quantit\u00E9", "Total"},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
 			},
 			new String[] {
 				"Produits", "Prix", "Quantit\u00E9", "Total"
 			}
-		));
-		Center.add(table);
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		
-		slider = new JSlider();
-		slider.setOrientation(SwingConstants.VERTICAL);
-		Center.add(slider);
+		updatePanier();
+		
+		
+		scrollPane.setViewportView(table);
+	}
+
+	private MouseAdapter closeFEN() {
+		return new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+			}
+		};
+	}
+
+	private MouseAdapter viderPanier() {
+		return new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Main.panier.viderPanier(Main.stock);
+				updatePanier();
+			}
+		};
+	}
+
+	private String[] listeLivreur() {
+		String[] listeOption = new String[3];
+		listeOption[0] = "COLISSIMO";
+		listeOption[1] = "DHL";
+		listeOption[2] = "MONDIAL_RELAI";
+		return listeOption;
+	}
+
+	private void updatePanier() {
+		DefaultTableModel m = (DefaultTableModel)table.getModel();
+		if (m.getRowCount() > 0) {
+		    for (int i = m.getRowCount() - 1; i > -1; i--) {
+		        m.removeRow(i);
+		    }
+		}
+		for (Article a : Main.panier.getList()) {
+			m.addRow(new Object[] {
+					a.getFromage().getDésignation() + " (" + a.getClé() + ")",
+					a.getPrixTTC(),
+					a.getQuantitéEnStock(),
+					a.getPrixTTC() * a.getQuantitéEnStock()
+			});
+		}
 	}
 
 }

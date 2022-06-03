@@ -3,8 +3,6 @@ package modele;
 import java.util.LinkedList;
 import java.util.List;
 
-import ihm.FEN_Panier;
-
 public class Panier {
 
 	private List<Article> panier;

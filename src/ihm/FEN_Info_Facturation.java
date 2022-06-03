@@ -1,6 +1,5 @@
 package ihm;
 
-import modele.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,7 +13,6 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Color;
-import javax.swing.JTextField;
 
 public class FEN_Info_Facturation {
 
@@ -48,7 +46,7 @@ public class FEN_Info_Facturation {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JPanel North = new JPanel();
