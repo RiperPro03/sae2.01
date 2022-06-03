@@ -25,6 +25,9 @@ public class Panier {
 	public float getTotal() {
 		return total;
 	}
+	public float getTotalSansLivraison() {
+		return total - livreur.getPrix();
+	}
 	public List<Article> getPanier(){
 		return panier;
 	}
@@ -41,7 +44,6 @@ public class Panier {
 		}
 		a.préempterQuantité(quantité);
 		this.updateTotal();
-		this.updateTotalSansLivraison();
 	}
 
 
