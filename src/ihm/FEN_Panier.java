@@ -26,6 +26,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
@@ -202,6 +204,7 @@ public class FEN_Panier {
 				if(e.getSource() == comboBox) {
 					Main.panier.setModeLivraison(ModeLivraison.getModeLivraison((String)comboBox.getSelectedItem()));
 					updateAffichageTotal();
+					updatePanier();
 				}
 			}
 		});
@@ -256,15 +259,35 @@ public class FEN_Panier {
 		    for (int i = m.getRowCount() - 1; i > -1; i--) {
 		        m.removeRow(i);
 		    }
-		}
+		}		
+
 		for (Article a : Main.panier.getList()) {
 			m.addRow(new Object[] {
 					a.getFromage().getDésignation() + " (" + a.getClé() + ")",
-					a.getPrixTTC(),
+					a.getPrixTTC() + "€",
 					a.getQuantitéEnStock(),
-					a.getPrixTTC() * a.getQuantitéEnStock()
+					a.getPrixTTC() * a.getQuantitéEnStock() + "€"
 			});
 		}
+		m.addRow(new Object[] {
+				"",
+				"",
+				"SOUS TOTAL TTC",
+				Main.panier.getTotalSansLivraison() + "€"
+		});
+		
+		m.addRow(new Object[] {
+				"",
+				"",
+				"FRAIS DE PORT",
+				Main.panier.getLivreur().getPrix() + "€"
+		});
+		m.addRow(new Object[] {
+				"",
+				"",
+				"TOTAL",
+				Main.panier.getTotal() + "€"
+		});
 	}
 
 }
