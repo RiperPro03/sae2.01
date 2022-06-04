@@ -13,12 +13,25 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Color;
+import javax.swing.JTextField;
 
 public class FEN_Info_Facturation {
 
 	private JFrame frame;
-	private JTable table1;
-	private JTable table2;
+	private JTextField Label_Nom;
+	private JTextField Label_Prénom;
+	private JTextField Label_Adresse;
+	private JTextField Label_Code_Postal;
+	private JTextField Label_Ville;
+	private JTextField Label_Téléphone;
+	private JTextField Label_Mail;
+	private JTextField Nom;
+	private JTextField Prénom;
+	private JTextField Adresse;
+	private JTextField Code_Postal;
+	private JTextField Ville;
+	private JTextField Téléphone;
+	private JTextField Mail;
 
 	
 	public static void launch() {
@@ -71,44 +84,89 @@ public class FEN_Info_Facturation {
 		
 		JPanel Center = new JPanel();
 		frame.getContentPane().add(Center, BorderLayout.CENTER);
-		Center.setLayout(new BoxLayout(Center, BoxLayout.X_AXIS));
+		Center.setLayout(new BorderLayout(0, 0));
 		
-		table1 = new JTable();
-		table1.setEnabled(false);
-		table1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table1.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Nom"},
-				{"Pr\u00E9nom"},
-				{"Adresse 1"},
-				{"Code Postal"},
-				{"Ville"},
-				{"T\u00E9l\u00E9phone"},
-				{"Mail"},
-			},
-			new String[] {
-				"Info"
-			}
-		));
-		Center.add(table1);
+		JPanel Information = new JPanel();
+		Center.add(Information, BorderLayout.NORTH);
+		Information.setLayout(new BoxLayout(Information, BoxLayout.X_AXIS));
 		
-		table2 = new JTable();
-		table2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		table2.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-				{null},
-			},
-			new String[] {
-				"New column"
-			}
-		));
-		Center.add(table2);
+		JPanel Label_Information = new JPanel();
+		Information.add(Label_Information);
+		Label_Information.setLayout(new BoxLayout(Label_Information, BoxLayout.Y_AXIS));
+		
+		Label_Nom = new JTextField();
+		Label_Nom.setEditable(false);
+		Label_Nom.setText("Nom");
+		Label_Information.add(Label_Nom);
+		Label_Nom.setColumns(10);
+		
+		Label_Prénom = new JTextField();
+		Label_Prénom.setEditable(false);
+		Label_Prénom.setText("Prénom");
+		Label_Information.add(Label_Prénom);
+		Label_Prénom.setColumns(10);
+		
+		Label_Adresse = new JTextField();
+		Label_Adresse.setText("Adresse");
+		Label_Adresse.setEditable(false);
+		Label_Information.add(Label_Adresse);
+		Label_Adresse.setColumns(10);
+		
+		Label_Code_Postal = new JTextField();
+		Label_Code_Postal.setText("Code Postal");
+		Label_Code_Postal.setEditable(false);
+		Label_Information.add(Label_Code_Postal);
+		Label_Code_Postal.setColumns(10);
+		
+		Label_Ville = new JTextField();
+		Label_Ville.setEditable(false);
+		Label_Ville.setText("Ville");
+		Label_Information.add(Label_Ville);
+		Label_Ville.setColumns(10);
+		
+		Label_Téléphone = new JTextField();
+		Label_Téléphone.setText("Téléphone");
+		Label_Téléphone.setEditable(false);
+		Label_Information.add(Label_Téléphone);
+		Label_Téléphone.setColumns(10);
+		
+		Label_Mail = new JTextField();
+		Label_Mail.setText("Mail");
+		Label_Mail.setEditable(false);
+		Label_Information.add(Label_Mail);
+		Label_Mail.setColumns(10);
+		
+		JPanel Remplir_Information = new JPanel();
+		Information.add(Remplir_Information);
+		Remplir_Information.setLayout(new BoxLayout(Remplir_Information, BoxLayout.Y_AXIS));
+		
+		Nom = new JTextField();
+		Remplir_Information.add(Nom);
+		Nom.setColumns(10);
+		
+		Prénom = new JTextField();
+		Remplir_Information.add(Prénom);
+		Prénom.setColumns(10);
+		
+		Adresse = new JTextField();
+		Remplir_Information.add(Adresse);
+		Adresse.setColumns(10);
+		
+		Code_Postal = new JTextField();
+		Remplir_Information.add(Code_Postal);
+		Code_Postal.setColumns(10);
+		
+		Ville = new JTextField();
+		Remplir_Information.add(Ville);
+		Ville.setColumns(10);
+		
+		Téléphone = new JTextField();
+		Remplir_Information.add(Téléphone);
+		Téléphone.setColumns(10);
+		
+		Mail = new JTextField();
+		Remplir_Information.add(Mail);
+		Mail.setColumns(10);
 	}
 
 }
