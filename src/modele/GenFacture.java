@@ -12,13 +12,12 @@ public class GenFacture {
 	private Panier panier;
 	private List<String> infoClient = new LinkedList<String>();
 	
-	public GenFacture(String nomFic, Panier p, List<String> iC) {
+	public GenFacture(Panier p, List<String> iC) {
 		this.panier = p;
 		this.infoClient = iC;
-		genFac(nomFic);
 	}
 	
-	private void genFac(String nomF) {
+	public void genFac(String nomF) {
 		String chemin = "./";
 		chemin += nomF + ".txt";
 		File f = new File(chemin);

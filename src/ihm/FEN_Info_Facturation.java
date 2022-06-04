@@ -91,9 +91,11 @@ public class FEN_Info_Facturation {
 				infoClient.add(Ville.getText());
 				infoClient.add(Téléphone.getText());
 				infoClient.add(Mail.getText());
-				GenFacture facture = new GenFacture("test",Main.panier,infoClient);
+				GenFacture facture = new GenFacture(Main.panier,infoClient);
+				facture.genFac("test");
 				System.out.println(infoClient);
 				infoClient.clear();
+				
 				
 			}
 		});
