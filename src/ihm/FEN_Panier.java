@@ -118,22 +118,7 @@ public class FEN_Panier {
 		
 		comboBox = new JComboBox();
 		panel_Total_Panier.add(comboBox);
-		comboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(e.getSource() == comboBox) {
-					System.out.println(comboBox.getSelectedItem());		//Affiche la nouvelle selection du combo box
-					
-					updateAffichageTotal();
-					
-//					for (ModeLivraison mL : ModeLivraison.values()) {
-//						if (mL.toString() == (String)comboBox.getSelectedItem()) {
-//							Main.panier.setModeLivraison(mL);
-//							
-//						}
-//					}
-				}
-			}
-		});
+		updateChoix();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		
 		refreshBTN = new JButton("Refresh");
@@ -209,6 +194,17 @@ public class FEN_Panier {
 		
 		
 		scrollPane.setViewportView(table);
+	}
+
+	private void updateChoix() {
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == comboBox) {
+					Main.panier.setModeLivraison(ModeLivraison.getModeLivraison((String)comboBox.getSelectedItem()));
+					updateAffichageTotal();
+				}
+			}
+		});
 	}
 	public void refreshWindowAtFocus() {
 		frame.addWindowFocusListener(new WindowFocusListener() {
