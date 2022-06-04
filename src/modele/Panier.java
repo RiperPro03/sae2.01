@@ -11,7 +11,7 @@ public class Panier {
 	
 	public Panier () {
 		panier = new LinkedList<Article>(); 
-		livreur = ModeLivraison.COLISSIMO;
+		livreur = ModeLivraison.DHL;
 		total = livreur.getPrix();
 	}
 	

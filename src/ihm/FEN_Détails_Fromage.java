@@ -20,6 +20,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.DefaultComboBoxModel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SpinnerNumberModel;
@@ -101,6 +104,8 @@ public class FEN_Détails_Fromage {
 		panel_Quantité.add(comboBox);
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		
+		choixOption(comboBox);
+		
 		JSpinner spinner_nb_fromage = new JSpinner();
 		panel_Quantité.add(spinner_nb_fromage);
 		spinner_nb_fromage.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
@@ -116,6 +121,7 @@ public class FEN_Détails_Fromage {
 		
 		affichage_Stock = new JTextField();
 		affichage_Stock.setEditable(false);
+		updateAffichageStock(comboBox);
 		panel_Stock.add(affichage_Stock);
 		affichage_Stock.setColumns(5);
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
@@ -127,6 +133,30 @@ public class FEN_Détails_Fromage {
 		eventClose(btn_annuler_ajout);
 		btn_annuler_ajout.setBackground(new Color(255, 69, 0));
 		South_South.add(btn_annuler_ajout);
+	}
+
+
+	private void choixOption(JComboBox comboBox) {
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == comboBox) {
+					updateAffichageStock(comboBox);
+				}
+			}
+		});
+	}
+
+
+	private void updateAffichageStock(JComboBox comboBox) {
+		Article choix = null;
+		for (Article a : fromage.getArticles()) {
+			if (a.getClé() == comboBox.getSelectedItem()) {
+				choix = Main.stock.getArticle(fromage.getDésignation(), a.getClé());
+				
+			}
+		}
+		String stockArticle = "" + choix.getQuantitéEnStock();
+		affichage_Stock.setText(stockArticle);
 	}
 
 

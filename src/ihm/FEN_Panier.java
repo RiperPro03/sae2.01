@@ -101,6 +101,8 @@ public class FEN_Panier {
 		panel_Mode_Livraison.add(affichage_Total);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
+		updateAffichageTotal();
 		panel_Mode_Livraison.add(textField);
 		textField.setColumns(5);
 		
@@ -116,6 +118,8 @@ public class FEN_Panier {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == comboBox) {
 					System.out.println(comboBox.getSelectedItem());		//Affiche la nouvelle selection du combo box
+					
+					updateAffichageTotal();
 					
 //					for (ModeLivraison mL : ModeLivraison.values()) {
 //						if (mL.toString() == (String)comboBox.getSelectedItem()) {
@@ -203,6 +207,11 @@ public class FEN_Panier {
 		scrollPane.setViewportView(table);
 	}
 
+	private void updateAffichageTotal() {
+		String stockArticle = "" + Main.panier.getTotal();
+		textField.setText(stockArticle);
+	}
+
 	private MouseAdapter closeFEN() {
 		return new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -229,6 +238,7 @@ public class FEN_Panier {
 	}
 
 	private void updatePanier() {
+		updateAffichageTotal();
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
 		if (m.getRowCount() > 0) {
 		    for (int i = m.getRowCount() - 1; i > -1; i--) {
