@@ -93,6 +93,7 @@ public class Panier {
 			stock.getArticle(a.getFromage().getDésignation(),a.getClé()).rendreQuantité(a.getQuantitéEnStock());
 		}
 		panier.clear();
+		this.total = 0 + livreur.getPrix();
 		
 	}
 	public void commander() {
