@@ -95,7 +95,7 @@ public class FEN_Info_Facturation {
 				facture.genFac("test");
 				System.out.println(infoClient);
 				infoClient.clear();
-				
+				Main.panier.commander();
 				
 			}
 		});

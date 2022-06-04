@@ -97,7 +97,9 @@ public class Panier {
 		
 	}
 	public void commander() {
+		assert panier.size()>0 : "Votre panier est vide";
 		panier.clear();
+		this.total = 0 + livreur.getPrix();
 	}
 		
 	}
