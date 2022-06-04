@@ -35,7 +35,6 @@ public class FEN_Panier {
 	private JPanel Center;
 	private JPanel South2;
 	private JComboBox comboBox;
-	private JTextField txtModeDeLivraison;
 	private JPanel South3;
 	private JButton Bouton1;
 	private JButton Bouton2;
@@ -44,6 +43,11 @@ public class FEN_Panier {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JButton refreshBTN;
+	private JPanel panel_Mode_Livraison;
+	private JLabel affichage_Total;
+	private JPanel panel_Total_Panier;
+	private JTextField textField;
+	private JLabel mode_De_Livraison;
 	
 	
 	public static void launch() {
@@ -86,18 +90,28 @@ public class FEN_Panier {
 		South.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		South2 = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) South2.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEFT);
 		South.add(South2);
+		South2.setLayout(new BorderLayout(0, 0));
+		String[] listeOption = listeLivreur();
 		
-		txtModeDeLivraison = new JTextField();
-		txtModeDeLivraison.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		txtModeDeLivraison.setText("Mode de livraison");
-		txtModeDeLivraison.setEditable(false);
-		South2.add(txtModeDeLivraison);
-		txtModeDeLivraison.setColumns(10);
+		panel_Mode_Livraison = new JPanel();
+		South2.add(panel_Mode_Livraison, BorderLayout.EAST);
+		
+		affichage_Total = new JLabel("Total :");
+		panel_Mode_Livraison.add(affichage_Total);
+		
+		textField = new JTextField();
+		panel_Mode_Livraison.add(textField);
+		textField.setColumns(5);
+		
+		panel_Total_Panier = new JPanel();
+		South2.add(panel_Total_Panier, BorderLayout.WEST);
+		
+		mode_De_Livraison = new JLabel("Mode de livraison :");
+		panel_Total_Panier.add(mode_De_Livraison);
 		
 		comboBox = new JComboBox();
+		panel_Total_Panier.add(comboBox);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == comboBox) {
@@ -112,17 +126,15 @@ public class FEN_Panier {
 				}
 			}
 		});
-		String[] listeOption = listeLivreur();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
-		South2.add(comboBox);
 		
 		refreshBTN = new JButton("Refresh");
+		panel_Total_Panier.add(refreshBTN);
 		refreshBTN.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				updatePanier();
 			}
 		});
-		South2.add(refreshBTN);
 		
 		South3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) South3.getLayout();

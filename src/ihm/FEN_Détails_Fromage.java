@@ -17,15 +17,20 @@ import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class FEN_Détails_Fromage {
 
 	private JFrame frame;
 	private Fromage fromage;
+	private JTextField affichage_Stock;
 	
 	public static void launch(Fromage f) {
 		EventQueue.invokeLater(new Runnable() {
@@ -78,18 +83,9 @@ public class FEN_Détails_Fromage {
 		FOOTER.setLayout(new GridLayout(2, 0, 0, 0));
 		
 		JPanel South_North = new JPanel();
-		FlowLayout fl_South_North = (FlowLayout) South_North.getLayout();
-		fl_South_North.setAlignment(FlowLayout.LEFT);
 		FOOTER.add(South_North);
-		
-		JComboBox comboBox = new JComboBox();
 		String[] listeOption = listeClé();
-		comboBox.setModel(new DefaultComboBoxModel(listeOption));
-		South_North.add(comboBox);
-		
-		JSpinner spinner_nb_fromage = new JSpinner();
-		spinner_nb_fromage.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		South_North.add(spinner_nb_fromage);
+		South_North.setLayout(new BorderLayout(0, 0));
 		
 		JPanel South_South = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) South_South.getLayout();
@@ -97,7 +93,31 @@ public class FEN_Détails_Fromage {
 		FOOTER.add(South_South);
 		
 		JButton btn_ajouter_panier = new JButton("Ajouter au panier");
+		
+		JPanel panel_Quantité = new JPanel();
+		South_North.add(panel_Quantité, BorderLayout.WEST);
+		
+		JComboBox comboBox = new JComboBox();
+		panel_Quantité.add(comboBox);
+		comboBox.setModel(new DefaultComboBoxModel(listeOption));
+		
+		JSpinner spinner_nb_fromage = new JSpinner();
+		panel_Quantité.add(spinner_nb_fromage);
+		spinner_nb_fromage.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spinner_nb_fromage.setPreferredSize(new Dimension(50,25));
 		addPanier(comboBox, spinner_nb_fromage, btn_ajouter_panier);
+		
+		JPanel panel_Stock = new JPanel();
+		South_North.add(panel_Stock, BorderLayout.EAST);
+		
+		JLabel label_Stock = new JLabel("Stock :");
+		label_Stock.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_Stock.add(label_Stock);
+		
+		affichage_Stock = new JTextField();
+		affichage_Stock.setEditable(false);
+		panel_Stock.add(affichage_Stock);
+		affichage_Stock.setColumns(5);
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
 		South_South.add(btn_ajouter_panier);
