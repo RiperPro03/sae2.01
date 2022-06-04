@@ -225,6 +225,7 @@ public class FEN_Panier {
 			public void mouseClicked(MouseEvent e) {
 				Main.panier.viderPanier(Main.stock);
 				updatePanier();
+				updateAffichageTotal();
 			}
 		};
 	}
