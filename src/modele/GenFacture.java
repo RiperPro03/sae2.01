@@ -4,16 +4,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class GenFacture {
 	
 	private Panier panier;
+	private List<String> infoClient = new LinkedList<String>();
 	
-	public GenFacture(Panier p) {
+	public GenFacture(String nomFic, Panier p, List<String> iC) {
 		this.panier = p;
+		this.infoClient = iC;
+		genFac(nomFic);
 	}
 	
-	public void genFac(String nomF) {
+	private void genFac(String nomF) {
 		String chemin = "./";
 		chemin += nomF + ".txt";
 		File f = new File(chemin);
@@ -34,6 +39,11 @@ public class GenFacture {
 					bw.newLine();
 					strF = "Total = " + panier.getTotal() + "€";
 					bw.write(strF);
+					bw.newLine();
+					for (String str : infoClient) {
+						bw.write(str);
+						bw.newLine();
+					}
 					bw.close();
 					fw.close();
 				} catch (IOException e) {

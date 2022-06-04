@@ -9,11 +9,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import modele.GenFacture;
+
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FEN_Info_Facturation {
 
@@ -33,6 +40,7 @@ public class FEN_Info_Facturation {
 	private JTextField Téléphone;
 	private JTextField Mail;
 
+	private List<String> infoClient = new LinkedList<String>();
 	
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,6 +82,21 @@ public class FEN_Info_Facturation {
 		South.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton Bouton1 = new JButton("Valider");
+		Bouton1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				infoClient.add(Nom.getText());
+				infoClient.add(Prénom.getText());
+				infoClient.add(Adresse.getText());
+				infoClient.add(Code_Postal.getText());
+				infoClient.add(Ville.getText());
+				infoClient.add(Téléphone.getText());
+				infoClient.add(Mail.getText());
+				GenFacture facture = new GenFacture("test",Main.panier,infoClient);
+				System.out.println(infoClient);
+				infoClient.clear();
+				
+			}
+		});
 		Bouton1.setBackground(Color.GREEN);
 		South.add(Bouton1);
 		
@@ -167,6 +190,8 @@ public class FEN_Info_Facturation {
 		Mail = new JTextField();
 		Remplir_Information.add(Mail);
 		Mail.setColumns(10);
+		
+		
 	}
 
 }
