@@ -11,6 +11,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import modele.Article;
+import modele.ModeLivraison;
+
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -23,6 +25,8 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FEN_Panier {
 
@@ -40,6 +44,7 @@ public class FEN_Panier {
 	private JScrollPane scrollPane;
 	private JTable table;
 	private JButton refreshBTN;
+	
 	
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
@@ -93,6 +98,20 @@ public class FEN_Panier {
 		txtModeDeLivraison.setColumns(10);
 		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(e.getSource() == comboBox) {
+					System.out.println(comboBox.getSelectedItem());		//Affiche la nouvelle selection du combo box
+					
+//					for (ModeLivraison mL : ModeLivraison.values()) {
+//						if (mL.toString() == (String)comboBox.getSelectedItem()) {
+//							Main.panier.setModeLivraison(mL);
+//							
+//						}
+//					}
+				}
+			}
+		});
 		String[] listeOption = listeLivreur();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		South2.add(comboBox);
@@ -123,7 +142,7 @@ public class FEN_Panier {
 				}
 				
 				modele.GenFacture facture = new modele.GenFacture(Main.panier);
-				facture.genFac("test");
+				facture.genFac("facture");
 
 				
 			}
@@ -155,7 +174,7 @@ public class FEN_Panier {
 			new Object[][] {
 			},
 			new String[] {
-				"Produits", "Prix", "Quantit\u00E9", "Total"
+				"Produits", "Prix Unitaire", "Quantit\u00E9", "Total"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
