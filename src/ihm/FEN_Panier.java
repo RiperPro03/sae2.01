@@ -266,14 +266,14 @@ public class FEN_Panier {
 					a.getFromage().getDésignation() + " (" + a.getClé() + ")",
 					a.getPrixTTC() + "€",
 					a.getQuantitéEnStock(),
-					a.getPrixTTC() * a.getQuantitéEnStock() + "€"
+					String.format("%.2f", a.getPrixTTC() * a.getQuantitéEnStock()) + "€"
 			});
 		}
 		m.addRow(new Object[] {
 				"",
 				"",
 				"SOUS TOTAL TTC",
-				Main.panier.getTotalSansLivraison() + "€"
+				String.format("%.2f", Main.panier.getTotalSansLivraison()) + "€"
 		});
 		
 		m.addRow(new Object[] {
@@ -286,7 +286,7 @@ public class FEN_Panier {
 				"",
 				"",
 				"TOTAL",
-				Main.panier.getTotal() + "€"
+				String.format("%.2f", Main.panier.getTotal()) + "€"
 		});
 	}
 
