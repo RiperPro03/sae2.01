@@ -24,6 +24,9 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -103,6 +106,7 @@ public class FEN_Panier {
 		textField = new JTextField();
 		textField.setEditable(false);
 		updateAffichageTotal();
+		refreshWindowAtFocus();
 		panel_Mode_Livraison.add(textField);
 		textField.setColumns(5);
 		
@@ -206,6 +210,16 @@ public class FEN_Panier {
 		
 		scrollPane.setViewportView(table);
 	}
+	public void refreshWindowAtFocus() {
+		frame.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				updatePanier();
+			}
+			public void windowLostFocus(WindowEvent e) {
+				updatePanier();
+			}
+		});
+	}
 
 	private void updateAffichageTotal() {
 		String stockArticle = "" + Main.panier.getTotal();
@@ -239,6 +253,7 @@ public class FEN_Panier {
 	}
 
 	private void updatePanier() {
+		Main.panier.setModeLivraison(ModeLivraison.getModeLivraison((String)comboBox.getSelectedItem()));
 		updateAffichageTotal();
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
 		if (m.getRowCount() > 0) {
