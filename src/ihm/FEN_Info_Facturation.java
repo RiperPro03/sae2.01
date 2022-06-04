@@ -92,7 +92,8 @@ public class FEN_Info_Facturation {
 				infoClient.add(Téléphone.getText());
 				infoClient.add(Mail.getText());
 				GenFacture facture = new GenFacture(Main.panier,infoClient);
-				facture.genFac("test");
+				String nomFac = Nom.getText() + "_Facture";
+				facture.genFac(nomFac);
 				System.out.println(infoClient);
 				infoClient.clear();
 				Main.panier.commander();
@@ -103,6 +104,11 @@ public class FEN_Info_Facturation {
 		South.add(Bouton1);
 		
 		JButton Bouton2 = new JButton("Annuler");
+		Bouton2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+			}
+		});
 		Bouton2.setBackground(Color.RED);
 		Bouton2.setForeground(Color.BLACK);
 		South.add(Bouton2);

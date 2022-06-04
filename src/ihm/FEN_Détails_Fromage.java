@@ -104,11 +104,14 @@ public class FEN_Détails_Fromage {
 		panel_Quantité.add(comboBox);
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		
-		choixOption(comboBox);
+		
 		
 		JSpinner spinner_nb_fromage = new JSpinner();
 		panel_Quantité.add(spinner_nb_fromage);
-		spinner_nb_fromage.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		
+		updateQteMax(comboBox, spinner_nb_fromage);
+		choixOption(comboBox,spinner_nb_fromage);
+		
 		spinner_nb_fromage.setPreferredSize(new Dimension(50,25));
 		addPanier(comboBox, spinner_nb_fromage, btn_ajouter_panier);
 		
@@ -136,11 +139,24 @@ public class FEN_Détails_Fromage {
 	}
 
 
-	private void choixOption(JComboBox comboBox) {
+	private void updateQteMax(JComboBox comboBox, JSpinner spinner_nb_fromage) {
+		Article choix = null;
+		for (Article a : fromage.getArticles()) {
+			if (a.getClé() == comboBox.getSelectedItem()) {
+				choix = Main.stock.getArticle(fromage.getDésignation(), a.getClé());
+				
+			}
+		}
+		spinner_nb_fromage.setModel(new SpinnerNumberModel(1, 1, choix.getQuantitéEnStock(), 1));
+	}
+
+
+	private void choixOption(JComboBox comboBox, JSpinner spinner_nb_fromage) {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == comboBox) {
 					updateAffichageStock(comboBox);
+					updateQteMax(comboBox, spinner_nb_fromage);
 				}
 			}
 		});

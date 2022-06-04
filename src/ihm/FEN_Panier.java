@@ -168,7 +168,7 @@ public class FEN_Panier {
 		
 		updatePanier();
 		
-		
+		refreshWindowAtFocus();
 		scrollPane.setViewportView(table);
 	}
 
