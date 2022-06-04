@@ -97,6 +97,7 @@ public class FEN_Info_Facturation {
 				System.out.println(infoClient);
 				infoClient.clear();
 				Main.panier.commander();
+				frame.setVisible(false);
 				
 			}
 		});
