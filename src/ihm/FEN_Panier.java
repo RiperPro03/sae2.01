@@ -47,7 +47,6 @@ public class FEN_Panier {
 	private JLabel titrePanier;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JButton refreshBTN;
 	private JPanel panel_Mode_Livraison;
 	private JLabel affichage_Total;
 	private JPanel panel_Total_Panier;
@@ -98,20 +97,7 @@ public class FEN_Panier {
 		South.add(South2);
 		South2.setLayout(new BorderLayout(0, 0));
 		String[] listeOption = listeLivreur();
-		
-		panel_Mode_Livraison = new JPanel();
-		South2.add(panel_Mode_Livraison, BorderLayout.EAST);
-		
-		affichage_Total = new JLabel("Total :");
-		panel_Mode_Livraison.add(affichage_Total);
-		
-		textField = new JTextField();
-		textField.setEditable(false);
-		updateAffichageTotal();
-		refreshWindowAtFocus();
-		panel_Mode_Livraison.add(textField);
-		textField.setColumns(5);
-		
+
 		panel_Total_Panier = new JPanel();
 		South2.add(panel_Total_Panier, BorderLayout.WEST);
 		
@@ -122,14 +108,6 @@ public class FEN_Panier {
 		panel_Total_Panier.add(comboBox);
 		updateChoix();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
-		
-		refreshBTN = new JButton("Refresh");
-		panel_Total_Panier.add(refreshBTN);
-		refreshBTN.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				updatePanier();
-			}
-		});
 		
 		South3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) South3.getLayout();
@@ -148,8 +126,7 @@ public class FEN_Panier {
 					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).toStringAvecStock()); // avoir la quantité d'un article dans le stock
 				}
 				
-				modele.GenFacture facture = new modele.GenFacture(Main.panier);
-				facture.genFac("facture");
+				FEN_Info_Facturation.launch();
 
 				
 			}
@@ -203,7 +180,6 @@ public class FEN_Panier {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == comboBox) {
 					Main.panier.setModeLivraison(ModeLivraison.getModeLivraison((String)comboBox.getSelectedItem()));
-					updateAffichageTotal();
 					updatePanier();
 				}
 			}
@@ -220,11 +196,6 @@ public class FEN_Panier {
 		});
 	}
 
-	private void updateAffichageTotal() {
-		String stockArticle = "" + Main.panier.getTotal();
-		textField.setText(stockArticle);
-	}
-
 	private MouseAdapter closeFEN() {
 		return new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -238,7 +209,6 @@ public class FEN_Panier {
 			public void mouseClicked(MouseEvent e) {
 				Main.panier.viderPanier(Main.stock);
 				updatePanier();
-				updateAffichageTotal();
 			}
 		};
 	}
@@ -253,7 +223,6 @@ public class FEN_Panier {
 
 	private void updatePanier() {
 		Main.panier.setModeLivraison(ModeLivraison.getModeLivraison((String)comboBox.getSelectedItem()));
-		updateAffichageTotal();
 		DefaultTableModel m = (DefaultTableModel)table.getModel();
 		if (m.getRowCount() > 0) {
 		    for (int i = m.getRowCount() - 1; i > -1; i--) {
@@ -280,7 +249,7 @@ public class FEN_Panier {
 				"",
 				"",
 				"FRAIS DE PORT",
-				Main.panier.getLivreur().getPrix() + "€"
+				String.format("%.2f", Main.panier.getLivreur().getPrix()) + "€"
 		});
 		m.addRow(new Object[] {
 				"",
