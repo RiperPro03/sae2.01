@@ -27,6 +27,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -36,6 +39,8 @@ public class FEN_Détails_Fromage {
 	private JFrame frame;
 	private Fromage fromage;
 	private JTextField affichage_Stock;
+	protected JComboBox comboBox;
+	private JSpinner spinner_nb_fromage;
 	
 	public static void launch(Fromage f) {
 		EventQueue.invokeLater(new Runnable() {
@@ -102,13 +107,13 @@ public class FEN_Détails_Fromage {
 		JPanel panel_Quantité = new JPanel();
 		South_North.add(panel_Quantité, BorderLayout.WEST);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		panel_Quantité.add(comboBox);
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		
 		
 		
-		JSpinner spinner_nb_fromage = new JSpinner();
+		spinner_nb_fromage = new JSpinner();
 		panel_Quantité.add(spinner_nb_fromage);
 		
 		updateQteMax(comboBox, spinner_nb_fromage);
@@ -138,6 +143,7 @@ public class FEN_Détails_Fromage {
 		eventClose(btn_annuler_ajout);
 		btn_annuler_ajout.setBackground(new Color(255, 69, 0));
 		South_South.add(btn_annuler_ajout);
+		refreshWindowAtFocus();
 	}
 
 
@@ -146,7 +152,6 @@ public class FEN_Détails_Fromage {
 		for (Article a : fromage.getArticles()) {
 			if (a.getClé() == comboBox.getSelectedItem()) {
 				choix = Main.stock.getArticle(fromage.getDésignation(), a.getClé());
-				
 			}
 		}
 		if (choix.getQuantitéEnStock() != 0) {
@@ -222,6 +227,18 @@ public class FEN_Détails_Fromage {
 		btn.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				frame.setVisible(false);
+			}
+		});
+	}
+	public void refreshWindowAtFocus() {
+		frame.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				updateAffichageStock(comboBox);
+				updateQteMax(comboBox,FEN_Détails_Fromage.this.spinner_nb_fromage);
+			}
+			public void windowLostFocus(WindowEvent e) {
+				updateAffichageStock(comboBox);
+				updateQteMax(comboBox,FEN_Détails_Fromage.this.spinner_nb_fromage);
 			}
 		});
 	}
