@@ -3,6 +3,8 @@ package modele;
 import java.util.LinkedList;
 import java.util.List;
 
+import ihm.Main;
+
 public class Panier {
 
 	private List<Article> panier;
@@ -103,6 +105,7 @@ public class Panier {
 	}
 	
 	public void supprimerUnArticle(int index) {
+		Main.stock.getArticle(panier.get(index).getFromage().getDésignation(),panier.get(index).getClé()).rendreQuantité(panier.get(index).getQuantitéEnStock());
 		panier.remove(index);
 	}
 

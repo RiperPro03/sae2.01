@@ -173,16 +173,7 @@ public class FEN_Panier {
 				if(Main.panier.isEmpty()) {
 					msgErreur("Vous n'avez pas d'articles à commander");
 					return;
-				}
-				System.out.println("Panier : ");
-				for (Article a : Main.panier.getList()) {
-					System.out.println(a.toStringAvecStock()); // avoir la quantité d'un article dans le panier
-				}
-				System.out.println("Stock : ");
-				for (Article a : Main.panier.getList()) {
-					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).toStringAvecStock()); // avoir la quantité d'un article dans le stock
-				}
-				
+				}				
 				FEN_Info_Facturation.launch();
 
 				
