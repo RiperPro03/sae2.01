@@ -14,6 +14,8 @@ import modele.Article;
 import modele.ModeLivraison;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
@@ -49,6 +51,7 @@ public class FEN_Panier {
 	private JPanel panel_Total_Panier;
 	private JTextField textField;
 	private JLabel mode_De_Livraison;
+	private JButton supArticle;
 	
 	
 	public static void launch() {
@@ -105,6 +108,9 @@ public class FEN_Panier {
 		panel_Total_Panier.add(comboBox);
 		updateChoix();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
+		
+		supArticle = new JButton("New button");
+		South2.add(supArticle, BorderLayout.EAST);
 		
 		South3 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) South3.getLayout();
@@ -168,9 +174,43 @@ public class FEN_Panier {
 		
 		
 		updatePanier();
-		
 		refreshWindowAtFocus();
+		
+		supUnArticleEvent();
+		
 		scrollPane.setViewportView(table);
+	}
+
+	private void supUnArticleEvent() {
+		supArticle.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel m = (DefaultTableModel) table.getModel();
+				if (table.getSelectedRow() == -1) {
+					if (table.getSelectedRow() == 0) {
+						msgErreur("Pas d'article à supprimer");
+					} else {
+						msgErreur("Selectionner un article à supprimer");
+					}
+				} else {
+					if (table.getSelectedRow() == table.getRowCount() - 1 || table.getSelectedRow() == table.getRowCount() - 2 || table.getSelectedRow() == table.getRowCount() - 3) {
+						msgErreur("Selectionner un article à supprimer");
+					} else {
+						Main.panier.supprimerUnArticle(table.getSelectedRow());
+						m.removeRow(table.getSelectedRow());
+						updatePanier();
+					}
+				}
+			}
+
+			
+		});
+	}
+	
+	private void msgErreur(String msg) {
+		JOptionPane.showMessageDialog(null, 
+		         msg,
+		         "Attention",
+		         JOptionPane.ERROR_MESSAGE);
 	}
 
 	private void updateChoix() {

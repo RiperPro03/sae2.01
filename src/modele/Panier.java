@@ -101,5 +101,9 @@ public class Panier {
 		panier.clear();
 		this.total = 0 + livreur.getPrix();
 	}
+	
+	public void supprimerUnArticle(int index) {
+		panier.remove(index);
+	}
 		
 	}
