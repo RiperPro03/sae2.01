@@ -166,6 +166,7 @@ public class FEN_Panier {
 			}
 		});
 		
+		
 		updatePanier();
 		
 		refreshWindowAtFocus();

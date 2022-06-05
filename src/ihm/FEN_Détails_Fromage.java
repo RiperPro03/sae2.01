@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import modele.Article;
 import modele.Fromage;
@@ -147,7 +149,12 @@ public class FEN_Détails_Fromage {
 				
 			}
 		}
-		spinner_nb_fromage.setModel(new SpinnerNumberModel(1, 1, choix.getQuantitéEnStock(), 1));
+		if (choix.getQuantitéEnStock() != 0) {
+			spinner_nb_fromage.setModel(new SpinnerNumberModel(1, 1, choix.getQuantitéEnStock(), 1));
+		} else {
+			spinner_nb_fromage.setModel(new SpinnerNumberModel(0, 0, 0, 0));
+		}
+		
 	}
 
 
@@ -191,6 +198,11 @@ public class FEN_Détails_Fromage {
 				if (spVal <= choix.getQuantitéEnStock() && spVal > 0) {
 					Main.panier.addArticle(choix, spVal);
 					frame.setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null, 
+					         "L'article est en rupture de stock",
+					         "Attention",
+					         JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
