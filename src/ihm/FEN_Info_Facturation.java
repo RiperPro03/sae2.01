@@ -9,9 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import modele.GenFacture;
 
 import javax.swing.JButton;
@@ -98,13 +95,12 @@ public class FEN_Info_Facturation {
 				infoClient.add(Téléphone.getText());
 				infoClient.add(Mail.getText());
 				GenFacture facture = new GenFacture(Main.panier,infoClient);
-				String nomFac = Nom.getText() + "_Facture";
+				String nomFac = Nom.getText() + "_Facture" + Math.round(Math.random() * 10000);
 				facture.genFac(nomFac);
-				System.out.println(infoClient);
 				infoClient.clear();
 				Main.panier.commander();
 		        JOptionPane.showMessageDialog(null, 
-		                 "Merci de nous avoir choisir vous allez recevoir une facture sur votre mail",
+		                 "Merci de nous avoir choisi vous allez recevoir une facture en copie",
 		                 "Merci de votre confiance",
 		                 JOptionPane.INFORMATION_MESSAGE);
 				frame.setVisible(false);

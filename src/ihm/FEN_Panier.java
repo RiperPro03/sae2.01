@@ -12,8 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 import modele.Article;
 import modele.ModeLivraison;
-import modele.Panier;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 

@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import modele.Article;
 import modele.Fromage;
 import modele.TypeLait;
 
@@ -120,9 +119,9 @@ public class FEN_Accueil {
 		sélection_type.add(btn_tout_fromage);
 		
 		JButton btn_fromage_brebis = new JButton("");
-		ImageIcon brebisImg = new ImageIcon("src/img/iconBrebis.png"); // load the image to a imageIcon
-		image = brebisImg.getImage(); // transform it 
-		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		ImageIcon brebisImg = new ImageIcon("src/img/iconBrebis.png");
+		image = brebisImg.getImage();
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
 		brebisImg = new ImageIcon(newimg);  // transform it back
 		btn_fromage_brebis.setIcon(brebisImg);
 		
@@ -130,18 +129,18 @@ public class FEN_Accueil {
 		sélection_type.add(btn_fromage_brebis);
 		
 		JButton btn_fromage_vache = new JButton("");
-		ImageIcon vacheImg = new ImageIcon("src/img/iconVache.png"); // load the image to a imageIcon
-		image = vacheImg.getImage(); // transform it 
-		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		vacheImg = new ImageIcon(newimg);  // transform it back
+		ImageIcon vacheImg = new ImageIcon("src/img/iconVache.png");
+		image = vacheImg.getImage();
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+		vacheImg = new ImageIcon(newimg);
 		btn_fromage_vache.setIcon(vacheImg);
 		filtre(btn_fromage_vache,TypeLait.VACHE);
 		sélection_type.add(btn_fromage_vache);
 		JButton btn_fromage_chèvre = new JButton("");
-		ImageIcon chèvreImg = new ImageIcon("src/img/iconChèvre.png"); // load the image to a imageIcon
-		image = chèvreImg.getImage(); // transform it 
-		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		chèvreImg = new ImageIcon(newimg);  // transform it back
+		ImageIcon chèvreImg = new ImageIcon("src/img/iconChèvre.png");
+		image = chèvreImg.getImage(); 
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+		chèvreImg = new ImageIcon(newimg);
 		btn_fromage_chèvre.setIcon(chèvreImg);
 		
 		filtre(btn_fromage_chèvre,TypeLait.CHEVRE);
