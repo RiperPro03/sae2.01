@@ -4,9 +4,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import modele.Article;
 import modele.Fromage;
 import modele.TypeLait;
 
@@ -26,6 +29,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 public class FEN_Accueil {
 	
@@ -33,6 +38,7 @@ public class FEN_Accueil {
 	private JTextField txtFromageQuiRit;
 	private JList liste_fromage;
 	private String[] fromagesListeDs;
+	private JButton btn_panier;
 
 	/**
 	 * Launch the application.
@@ -71,7 +77,12 @@ public class FEN_Accueil {
 		frame.getContentPane().add(header, BorderLayout.NORTH);
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		
-		JLabel image_header = new JLabel("Attente image");
+		JLabel image_header = new JLabel("     ");
+		ImageIcon fromageImg = new ImageIcon("src/img/iconFromage.png"); // load the image to a imageIcon
+		Image image = fromageImg.getImage(); // transform it 
+		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		fromageImg = new ImageIcon(newimg);  // transform it back
+		image_header.setIcon(fromageImg);
 		header.add(image_header);
 		
 		txtFromageQuiRit = new JTextField();
@@ -85,7 +96,13 @@ public class FEN_Accueil {
 		header.add(txtFromageQuiRit);
 		txtFromageQuiRit.setColumns(1);
 		
-		JButton btn_panier = new JButton("indic_panier");
+		btn_panier = new JButton(" 0€ ");
+		ImageIcon panierImg = new ImageIcon("src/img/iconCaddie.png"); // load the image to a imageIcon
+		image = panierImg.getImage(); // transform it 
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		panierImg = new ImageIcon(newimg);  // transform it back
+		btn_panier.setIcon(panierImg);
+		refreshWindowAtFocus();
 		btn_panier.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				FEN_Panier.launch();
@@ -102,15 +119,31 @@ public class FEN_Accueil {
 		affichageTout(btn_tout_fromage);
 		sélection_type.add(btn_tout_fromage);
 		
-		JButton btn_fromage_brebis = new JButton("Attente icon b");
+		JButton btn_fromage_brebis = new JButton("");
+		ImageIcon brebisImg = new ImageIcon("src/img/iconBrebis.png"); // load the image to a imageIcon
+		image = brebisImg.getImage(); // transform it 
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		brebisImg = new ImageIcon(newimg);  // transform it back
+		btn_fromage_brebis.setIcon(brebisImg);
+		
 		filtre(btn_fromage_brebis,TypeLait.BREBIS);
 		sélection_type.add(btn_fromage_brebis);
 		
-		JButton btn_fromage_vache = new JButton("Attente icon v");
+		JButton btn_fromage_vache = new JButton("");
+		ImageIcon vacheImg = new ImageIcon("src/img/iconVache.png"); // load the image to a imageIcon
+		image = vacheImg.getImage(); // transform it 
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		vacheImg = new ImageIcon(newimg);  // transform it back
+		btn_fromage_vache.setIcon(vacheImg);
 		filtre(btn_fromage_vache,TypeLait.VACHE);
 		sélection_type.add(btn_fromage_vache);
+		JButton btn_fromage_chèvre = new JButton("");
+		ImageIcon chèvreImg = new ImageIcon("src/img/iconChèvre.png"); // load the image to a imageIcon
+		image = chèvreImg.getImage(); // transform it 
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		chèvreImg = new ImageIcon(newimg);  // transform it back
+		btn_fromage_chèvre.setIcon(chèvreImg);
 		
-		JButton btn_fromage_chèvre = new JButton("Attente icon c");
 		filtre(btn_fromage_chèvre,TypeLait.CHEVRE);
 		sélection_type.add(btn_fromage_chèvre);
 		
@@ -142,6 +175,7 @@ public class FEN_Accueil {
 		btn_fromage_brebis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FEN_Accueil.this.updateListeFromageAccueil(Main.stock.fromagesAuLaitDe(lait));
+
 			}
 		});
 	}
@@ -158,5 +192,19 @@ public class FEN_Accueil {
 		this.fromagesListeDs = afficherFromagesAccueil(lesFromages);
 		this.liste_fromage.setListData(fromagesListeDs);
 	}
+	public void refreshWindowAtFocus() {
+		frame.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent e) {
+				updatePanierPrix();
+			}
+			public void windowLostFocus(WindowEvent e) {
+				updatePanierPrix();
+			}
+		});
+	}
 
-}
+	protected void updatePanierPrix() {
+		this.btn_panier.setText(String.format("%.2f",Main.panier.getTotalSansLivraison()) + "€");
+	}
+		
+	}
