@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modele.Article;
 import modele.ModeLivraison;
+import modele.Panier;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -109,7 +110,7 @@ public class FEN_Panier {
 		updateChoix();
 		comboBox.setModel(new DefaultComboBoxModel(listeOption));
 		
-		supArticle = new JButton("New button");
+		supArticle = new JButton("Supprimer l'article selectionné");
 		South2.add(supArticle, BorderLayout.EAST);
 		
 		South3 = new JPanel();
@@ -118,22 +119,7 @@ public class FEN_Panier {
 		South.add(South3);
 		
 		Bouton1 = new JButton("Commander");
-		Bouton1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				System.out.println("Panier : ");
-				for (Article a : Main.panier.getList()) {
-					System.out.println(a.toStringAvecStock()); // avoir la quantité d'un article dans le panier
-				}
-				System.out.println("Stock : ");
-				for (Article a : Main.panier.getList()) {
-					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).toStringAvecStock()); // avoir la quantité d'un article dans le stock
-				}
-				
-				FEN_Info_Facturation.launch();
-
-				
-			}
-		});
+		commanderPanier();
 		Bouton1.setForeground(Color.BLACK);
 		Bouton1.setBackground(Color.GREEN);
 		South3.add(Bouton1);
@@ -179,6 +165,29 @@ public class FEN_Panier {
 		supUnArticleEvent();
 		
 		scrollPane.setViewportView(table);
+	}
+
+	private void commanderPanier() {
+		Bouton1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(Main.panier.isEmpty()) {
+					msgErreur("Vous n'avez pas d'articles à commander");
+					return;
+				}
+				System.out.println("Panier : ");
+				for (Article a : Main.panier.getList()) {
+					System.out.println(a.toStringAvecStock()); // avoir la quantité d'un article dans le panier
+				}
+				System.out.println("Stock : ");
+				for (Article a : Main.panier.getList()) {
+					System.out.println(Main.stock.getArticle(a.getFromage().getDésignation(), a.getClé()).toStringAvecStock()); // avoir la quantité d'un article dans le stock
+				}
+				
+				FEN_Info_Facturation.launch();
+
+				
+			}
+		});
 	}
 
 	private void supUnArticleEvent() {
@@ -245,6 +254,10 @@ public class FEN_Panier {
 	private MouseAdapter viderPanier() {
 		return new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if(Main.panier.isEmpty()) {
+					msgErreur("Aucun article a supprimer");
+					return;
+				}
 				Main.panier.viderPanier(Main.stock);
 				updatePanier();
 			}

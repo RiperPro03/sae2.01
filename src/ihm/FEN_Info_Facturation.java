@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -84,6 +86,10 @@ public class FEN_Info_Facturation {
 		JButton Bouton1 = new JButton("Valider");
 		Bouton1.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if(Nom.getText().isEmpty() || Prénom.getText().isEmpty() || Adresse.getText().isEmpty() || Ville.getText().isEmpty() || Téléphone.getText().isEmpty() || Mail.getText().isEmpty()) {
+					msgErreur("Veillez saisir vos informations de facturation");
+					return;
+				}
 				infoClient.add(Nom.getText());
 				infoClient.add(Prénom.getText());
 				infoClient.add(Adresse.getText());
@@ -97,6 +103,10 @@ public class FEN_Info_Facturation {
 				System.out.println(infoClient);
 				infoClient.clear();
 				Main.panier.commander();
+		        JOptionPane.showMessageDialog(null, 
+		                 "Merci de nous avoir choisir vous allez recevoir une facture sur votre mail",
+		                 "Merci de votre confiance",
+		                 JOptionPane.INFORMATION_MESSAGE);
 				frame.setVisible(false);
 				
 			}
@@ -202,5 +212,11 @@ public class FEN_Info_Facturation {
 		
 		
 	}
+	private void msgErreur(String msg) {
+        JOptionPane.showMessageDialog(null, 
+                 msg,
+                 "Attention",
+                 JOptionPane.ERROR_MESSAGE);
+    }
 
 }

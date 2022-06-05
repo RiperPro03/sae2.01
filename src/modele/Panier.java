@@ -105,5 +105,11 @@ public class Panier {
 	public void supprimerUnArticle(int index) {
 		panier.remove(index);
 	}
+
+
+	public boolean isEmpty() {
+		
+		return panier.size() == 0;
+	}
 		
 	}
