@@ -51,6 +51,7 @@ public class GenFacture {
 		for(String s : this.infoClient) {
 			result = result+ s + "\n";
 		}
+		result+= "\n";
 		for(Article a : this.panier.getPanier()) {
 			float total = a.getPrixTTC() * a.getQuantitéEnStock();
 			result+= a.toStringIHM() + " Total : " + total +"\n" ;
