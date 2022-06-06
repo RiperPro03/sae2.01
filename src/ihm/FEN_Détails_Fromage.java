@@ -131,7 +131,7 @@ public class FEN_Détails_Fromage {
 		
 		Prix = new JTextField();
 		panel_Prix.add(Prix);
-		
+		Prix.setEditable(false);
 		Prix.setColumns(5);
 		
 		
