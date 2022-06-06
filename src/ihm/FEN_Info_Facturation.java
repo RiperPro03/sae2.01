@@ -111,11 +111,7 @@ public class FEN_Info_Facturation {
 		South.add(Bouton1);
 		
 		JButton Bouton2 = new JButton("Annuler");
-		Bouton2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				frame.setVisible(false);
-			}
-		});
+		fermerFEN(Bouton2);
 		Bouton2.setBackground(Color.RED);
 		Bouton2.setForeground(Color.BLACK);
 		South.add(Bouton2);
@@ -207,6 +203,14 @@ public class FEN_Info_Facturation {
 		Mail.setColumns(10);
 		
 		
+	}
+
+	private void fermerFEN(JButton Bouton2) {
+		Bouton2.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				frame.setVisible(false);
+			}
+		});
 	}
 	private void msgErreur(String msg) {
         JOptionPane.showMessageDialog(null, 

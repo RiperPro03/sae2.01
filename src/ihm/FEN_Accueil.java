@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -77,6 +78,7 @@ public class FEN_Accueil {
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		
 		JLabel image_header = new JLabel("     ");
+		easterEgg(image_header);
 		ImageIcon fromageImg = new ImageIcon("src/img/iconFromage.png"); // load the image to a imageIcon
 		Image image = fromageImg.getImage(); // transform it 
 		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
@@ -102,11 +104,7 @@ public class FEN_Accueil {
 		panierImg = new ImageIcon(newimg);  // transform it back
 		btn_panier.setIcon(panierImg);
 		refreshWindowAtFocus();
-		btn_panier.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FEN_Panier.launch();
-			}
-		});
+		ouvrirPanier();
 		header.add(btn_panier);
 		
 		JPanel sélection_type = new JPanel();
@@ -151,6 +149,12 @@ public class FEN_Accueil {
 				
 		fromagesListeDs = afficherFromagesAccueil(Main.stock.getLesFromages());
 		liste_fromage = new JList(fromagesListeDs);
+		ouvrirDetailFromage();
+		liste_fromage.setVisibleRowCount(10);
+		scrollPane_1.setViewportView(liste_fromage);
+	}
+
+	private void ouvrirDetailFromage() {
 		liste_fromage.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				Fromage f = Main.stock.getFromage((String)liste_fromage.getSelectedValue());
@@ -158,8 +162,25 @@ public class FEN_Accueil {
 				
 			}
 		});
-		liste_fromage.setVisibleRowCount(10);
-		scrollPane_1.setViewportView(liste_fromage);
+	}
+
+	private void ouvrirPanier() {
+		btn_panier.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FEN_Panier.launch();
+			}
+		});
+	}
+
+	private void easterEgg(JLabel image_header) {
+		image_header.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null, 
+		                 "hmmmmmm le bon fromage de chèvre",
+		                 "Easter Egg",
+		                 JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 	}
 
 	public void affichageTout(JButton btn_tout_fromage) {
