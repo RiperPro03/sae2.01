@@ -53,8 +53,7 @@ public class GenFacture {
 		}
 		result+= "\n";
 		for(Article a : this.panier.getPanier()) {
-			float total = a.getPrixTTC() * a.getQuantitéEnStock();
-			result+= a.toStringIHM() + " Total : " + total +"\n" ;
+			result+= a.toStringIHM() +"\n" ;
 		}
 		result += "\n\t\t\t\t\t Sous total \t\t"+ panier.getTotalSansLivraison() + "€\n";
 		result += "\t\t\t\t\t Livraison" + panier.getLivreur().toString()+"€\n";

@@ -59,7 +59,7 @@ public class Article {
 	}
 	
 	public String toStringIHM() { 	//à FAIRE
-		return this.toString() + " Quantité : " + this.quantitéEnStock;
+		return this.toString() + " Quantité : " + this.quantitéEnStock + " Total : " + getPrixTTC() * getQuantitéEnStock() + "€";
 	}
 	
 }
