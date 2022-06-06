@@ -41,6 +41,7 @@ public class FEN_Détails_Fromage {
 	private JTextField affichage_Stock;
 	protected JComboBox comboBox;
 	private JSpinner spinner_nb_fromage;
+	private JTextField Total;
 	
 	public static void launch(Fromage f) {
 		EventQueue.invokeLater(new Runnable() {
@@ -122,17 +123,24 @@ public class FEN_Détails_Fromage {
 		spinner_nb_fromage.setPreferredSize(new Dimension(50,25));
 		addPanier(comboBox, spinner_nb_fromage, btn_ajouter_panier);
 		
-		JPanel panel_Stock = new JPanel();
-		South_North.add(panel_Stock, BorderLayout.EAST);
+		JPanel panel_Total = new JPanel();
+		South_North.add(panel_Total, BorderLayout.EAST);
+		
+		JLabel lblTotal = new JLabel("Total :");
+		panel_Total.add(lblTotal);
+		
+		Total = new JTextField();
+		panel_Total.add(Total);
+		Total.setColumns(5);
+		updateAffichageStock(comboBox);
 		
 		JLabel label_Stock = new JLabel("Stock :");
+		panel_Quantité.add(label_Stock);
 		label_Stock.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_Stock.add(label_Stock);
 		
 		affichage_Stock = new JTextField();
+		panel_Quantité.add(affichage_Stock);
 		affichage_Stock.setEditable(false);
-		updateAffichageStock(comboBox);
-		panel_Stock.add(affichage_Stock);
 		affichage_Stock.setColumns(5);
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
