@@ -16,10 +16,10 @@ public class GenFacture {
 	public GenFacture(Panier p, List<String> iC) {
 		this.panier = p;
 		this.infoClient = iC;
+		this.numFac = (int) Math.round(Math.random() * 10000);
 	}
 	
 	public void genFac(String nomF) {
-		genNumFac();
 		String chemin = "./";
 		chemin += nomF + getNumFac() + ".txt";
 		File f = new File(chemin);
@@ -60,10 +60,6 @@ public class GenFacture {
 		result += "\t\t\t\t\t Total \t\t"+ panier.getTotal() + "€\n";		
 		
 		return result;
-	}
-	
-	private void genNumFac() {
-		this.numFac = (int) Math.round(Math.random() * 10000);
 	}
 	
 	private int getNumFac() {
