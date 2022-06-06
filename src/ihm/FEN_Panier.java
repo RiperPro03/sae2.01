@@ -277,7 +277,7 @@ public class FEN_Panier {
 					a.getFromage().getDésignation() + " (" + a.getClé() + ")",
 					a.getPrixTTC() + "€",
 					a.getQuantitéEnStock(),
-					String.format("%.2f", a.getPrixTTC() * a.getQuantitéEnStock()) + "€"
+					String.format("%.2f", a.getTotalPrix()) + "€"
 			});
 		}
 		m.addRow(new Object[] {

@@ -58,8 +58,12 @@ public class Article {
 		this.quantitéEnStock += quantité;
 	}
 	
+	public float getTotalPrix() {
+		return getPrixTTC() * getQuantitéEnStock();
+	}
+	
 	public String toStringIHM() { 	//à FAIRE
-		return this.toString() + " Quantité : " + this.quantitéEnStock + " Total : " + getPrixTTC() * getQuantitéEnStock() + "€";
+		return this.toString() + " Quantité : " + this.quantitéEnStock + " Total : " + getTotalPrix() + "€";
 	}
 	
 }
