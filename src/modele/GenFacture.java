@@ -57,5 +57,22 @@ public class GenFacture {
 			
 		}
 	}
+	public String factureToDisplay() {
+		String result = new String();
+		result+= "\t\tFacture n° XXXX Fromage qui rit";
+		for(String s : this.infoClient) {
+			result = result+ s + "\n";
+		}
+		result+= "\nProduit \t\t\t Prix \t Qté \t\t Total\n";
+		for(Article a : this.panier.getPanier()) {
+			float total = a.getPrixTTC() * a.getQuantitéEnStock();
+			result+= a.getFromage().getDésignation() +" "+ a.getClé()+"\t" + a.getPrixTTC() +"\t\t"+ a.getQuantitéEnStock() +"\t\t"+total +"\n" ;
+		}
+		result += "\t\t\t\t\t Sous total \t\t"+ panier.getTotalSansLivraison() + "€\n";
+		result += "\t\t\t\t\t Livraison" + panier.getLivreur().toString()+"€\n";
+		result += "\t\t\t\t\t Total \t\t"+ panier.getTotal() + "€\n";		
+		
+		return result;
+	}
 
 }
