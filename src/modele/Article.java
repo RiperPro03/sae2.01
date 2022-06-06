@@ -59,7 +59,7 @@ public class Article {
 	}
 	
 	public String toStringIHM() { 	//à FAIRE
-		return "void";
+		return this.toString() + " Quantité : " + this.quantitéEnStock;
 	}
 	
 }

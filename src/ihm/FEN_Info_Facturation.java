@@ -81,36 +81,7 @@ public class FEN_Info_Facturation {
 		South.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
 		JButton Bouton1 = new JButton("Valider");
-		Bouton1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if(Nom.getText().isEmpty() || Prénom.getText().isEmpty() || Adresse.getText().isEmpty() || Ville.getText().isEmpty() || Téléphone.getText().isEmpty() || Mail.getText().isEmpty()) {
-					msgErreur("Veillez saisir vos informations de facturation");
-					return;
-				}
-				infoClient.add(Nom.getText());
-				infoClient.add(Prénom.getText());
-				infoClient.add(Adresse.getText());
-				infoClient.add(Code_Postal.getText());
-				infoClient.add(Ville.getText());
-				infoClient.add(Téléphone.getText());
-				infoClient.add(Mail.getText());
-				GenFacture facture = new GenFacture(Main.panier,infoClient);
-				String nomFac = Nom.getText() + "_Facture";
-				facture.genFac(nomFac);
-				
-				String laFacture = facture.factureToDisplay();
-				FEN_AffichageFacture.launch(laFacture);
-				
-				infoClient.clear();
-				Main.panier.commander();
-				JOptionPane.showMessageDialog(null, 
-						"Merci de nous avoir choisi vous allez recevoir une facture en copie",
-						"Merci de votre confiance",
-						JOptionPane.INFORMATION_MESSAGE);
-				frame.setVisible(false);
-
-			}
-		});
+		commander(Bouton1);
 		Bouton1.setBackground(Color.GREEN);
 		South.add(Bouton1);
 
@@ -207,6 +178,39 @@ public class FEN_Info_Facturation {
 		Mail.setColumns(10);
 
 
+	}
+
+	private void commander(JButton Bouton1) {
+		Bouton1.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if(Nom.getText().isEmpty() || Prénom.getText().isEmpty() || Adresse.getText().isEmpty() || Ville.getText().isEmpty() || Téléphone.getText().isEmpty() || Mail.getText().isEmpty()) {
+					msgErreur("Veillez saisir vos informations de facturation");
+					return;
+				}
+				infoClient.add(Nom.getText());
+				infoClient.add(Prénom.getText());
+				infoClient.add(Adresse.getText());
+				infoClient.add(Code_Postal.getText());
+				infoClient.add(Ville.getText());
+				infoClient.add(Téléphone.getText());
+				infoClient.add(Mail.getText());
+				GenFacture facture = new GenFacture(Main.panier,infoClient);
+				String nomFac = Nom.getText() + "_Facture";
+				facture.genFac(nomFac);
+				
+				String laFacture = facture.factureToDisplay();
+				FEN_AffichageFacture.launch(laFacture);
+				
+				infoClient.clear();
+				Main.panier.commander();
+				JOptionPane.showMessageDialog(null, 
+						"Merci de nous avoir choisi vous allez recevoir une facture en copie",
+						"Merci de votre confiance",
+						JOptionPane.INFORMATION_MESSAGE);
+				frame.setVisible(false);
+
+			}
+		});
 	}
 
 	private void fermerFEN(JButton Bouton2) {
