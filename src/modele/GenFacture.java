@@ -11,6 +11,7 @@ public class GenFacture {
 	
 	private Panier panier;
 	private List<String> infoClient = new LinkedList<String>();
+	private int numFac;
 	
 	public GenFacture(Panier p, List<String> iC) {
 		this.panier = p;
@@ -18,8 +19,9 @@ public class GenFacture {
 	}
 	
 	public void genFac(String nomF) {
+		genNumFac();
 		String chemin = "./";
-		chemin += nomF + ".txt";
+		chemin += nomF + getNumFac() + ".txt";
 		File f = new File(chemin);
 		if (!f.exists()) {
 			if (!panier.getList().isEmpty()) {
@@ -27,22 +29,8 @@ public class GenFacture {
 					f.createNewFile();
 					FileWriter fw = new FileWriter(f);
 					BufferedWriter bw = new BufferedWriter(fw);
-					String strF;
-					for (Article a : panier.getList()) {
-						strF = a.getFromage().getDésignation() + " (" + a.getClé() + ") : " + a.getQuantitéEnStock() + " [" + a.getPrixTTC() + "€]";
-						bw.write(strF);
-						bw.newLine();
-					}
-					strF = "Livraison : " + panier.getLivreur();
-					bw.write(strF);
+					bw.write(factureToDisplay());
 					bw.newLine();
-					strF = "Total = " + panier.getTotal() + "€";
-					bw.write(strF);
-					bw.newLine();
-					for (String str : infoClient) {
-						bw.write(str);
-						bw.newLine();
-					}
 					bw.close();
 					fw.close();
 				} catch (IOException e) {
@@ -59,7 +47,7 @@ public class GenFacture {
 	}
 	public String factureToDisplay() {
 		String result = new String();
-		result+= "\t\tFacture n° XXXX Fromage qui rit";
+		result+= "\t\tFacture n° " + getNumFac() + " Fromage qui rit";
 		for(String s : this.infoClient) {
 			result = result+ s + "\n";
 		}
@@ -73,6 +61,14 @@ public class GenFacture {
 		result += "\t\t\t\t\t Total \t\t"+ panier.getTotal() + "€\n";		
 		
 		return result;
+	}
+	
+	private void genNumFac() {
+		this.numFac = (int) Math.round(Math.random() * 10000);
+	}
+	
+	private int getNumFac() {
+		return this.numFac;
 	}
 
 }

@@ -1,6 +1,7 @@
 package ihm;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -19,14 +20,17 @@ public class FEN_AffichageFacture extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			FEN_AffichageFacture dialog = new FEN_AffichageFacture();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public static void launch(String textfacture) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FEN_AffichageFacture window = new FEN_AffichageFacture(textfacture);
+					window.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 
 	/**

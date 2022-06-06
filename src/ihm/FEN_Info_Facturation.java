@@ -95,11 +95,12 @@ public class FEN_Info_Facturation {
 				infoClient.add(Téléphone.getText());
 				infoClient.add(Mail.getText());
 				GenFacture facture = new GenFacture(Main.panier,infoClient);
-				String nomFac = Nom.getText() + "_Facture" + Math.round(Math.random() * 10000);
+				String nomFac = Nom.getText() + "_Facture";
 				facture.genFac(nomFac);
+				
 				String laFacture = facture.factureToDisplay();
-				FEN_AffichageFacture fenFac = new FEN_AffichageFacture(laFacture);
-				fenFac.setVisible(true);
+				FEN_AffichageFacture.launch(laFacture);
+				
 				infoClient.clear();
 				Main.panier.commander();
 				JOptionPane.showMessageDialog(null, 
