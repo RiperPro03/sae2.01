@@ -79,10 +79,10 @@ public class FEN_Accueil {
 		
 		JLabel image_header = new JLabel("     ");
 		easterEgg(image_header);
-		ImageIcon fromageImg = new ImageIcon("src/img/iconFromage.png"); // load the image to a imageIcon
-		Image image = fromageImg.getImage(); // transform it 
-		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		fromageImg = new ImageIcon(newimg);  // transform it back
+		ImageIcon fromageImg = new ImageIcon("src/img/iconFromage.png");
+		Image image = fromageImg.getImage();
+		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+		fromageImg = new ImageIcon(newimg);
 		image_header.setIcon(fromageImg);
 		header.add(image_header);
 		
@@ -98,10 +98,10 @@ public class FEN_Accueil {
 		txtFromageQuiRit.setColumns(1);
 		
 		btn_panier = new JButton(" 0€ ");
-		ImageIcon panierImg = new ImageIcon("src/img/iconCaddie.png"); // load the image to a imageIcon
-		image = panierImg.getImage(); // transform it 
-		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		panierImg = new ImageIcon(newimg);  // transform it back
+		ImageIcon panierImg = new ImageIcon("src/img/iconCaddie.png");
+		image = panierImg.getImage();
+		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
+		panierImg = new ImageIcon(newimg);
 		btn_panier.setIcon(panierImg);
 		refreshWindowAtFocus();
 		ouvrirPanier();
@@ -120,7 +120,7 @@ public class FEN_Accueil {
 		ImageIcon brebisImg = new ImageIcon("src/img/iconBrebis.png");
 		image = brebisImg.getImage();
 		newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
-		brebisImg = new ImageIcon(newimg);  // transform it back
+		brebisImg = new ImageIcon(newimg);
 		btn_fromage_brebis.setIcon(brebisImg);
 		
 		filtre(btn_fromage_brebis,TypeLait.BREBIS);
