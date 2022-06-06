@@ -146,7 +146,7 @@ public class FEN_Détails_Fromage {
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
 		South_South.add(btn_ajouter_panier);
-		updateAffichageStock(comboBox);
+		updateAffichageStockPrix(comboBox);
 		
 		JButton btn_annuler_ajout = new JButton("Annuler");
 		eventClose(btn_annuler_ajout);
@@ -176,7 +176,7 @@ public class FEN_Détails_Fromage {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == comboBox) {
-					updateAffichageStock(comboBox);
+					updateAffichageStockPrix(comboBox);
 					updateQteMax(comboBox, spinner_nb_fromage);
 				}
 			}
@@ -184,7 +184,7 @@ public class FEN_Détails_Fromage {
 	}
 
 
-	private void updateAffichageStock(JComboBox comboBox) {
+	private void updateAffichageStockPrix(JComboBox comboBox) {
 		Article choix = null;
 		for (Article a : fromage.getArticles()) {
 			if (a.getClé() == comboBox.getSelectedItem()) {
@@ -245,11 +245,11 @@ public class FEN_Détails_Fromage {
 	public void refreshWindowAtFocus() {
 		frame.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent e) {
-				updateAffichageStock(comboBox);
+				updateAffichageStockPrix(comboBox);
 				updateQteMax(comboBox,FEN_Détails_Fromage.this.spinner_nb_fromage);
 			}
 			public void windowLostFocus(WindowEvent e) {
-				updateAffichageStock(comboBox);
+				updateAffichageStockPrix(comboBox);
 				updateQteMax(comboBox,FEN_Détails_Fromage.this.spinner_nb_fromage);
 			}
 		});
