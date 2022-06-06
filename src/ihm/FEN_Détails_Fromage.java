@@ -41,7 +41,7 @@ public class FEN_Détails_Fromage {
 	private JTextField affichage_Stock;
 	protected JComboBox comboBox;
 	private JSpinner spinner_nb_fromage;
-	private JTextField Total;
+	private JTextField Prix;
 	
 	public static void launch(Fromage f) {
 		EventQueue.invokeLater(new Runnable() {
@@ -123,16 +123,17 @@ public class FEN_Détails_Fromage {
 		spinner_nb_fromage.setPreferredSize(new Dimension(50,25));
 		addPanier(comboBox, spinner_nb_fromage, btn_ajouter_panier);
 		
-		JPanel panel_Total = new JPanel();
-		South_North.add(panel_Total, BorderLayout.EAST);
+		JPanel panel_Prix = new JPanel();
+		South_North.add(panel_Prix, BorderLayout.EAST);
 		
-		JLabel lblTotal = new JLabel("Total :");
-		panel_Total.add(lblTotal);
+		JLabel lblPrix = new JLabel("Prix unitaire:");
+		panel_Prix.add(lblPrix);
 		
-		Total = new JTextField();
-		panel_Total.add(Total);
-		Total.setColumns(5);
-		updateAffichageStock(comboBox);
+		Prix = new JTextField();
+		panel_Prix.add(Prix);
+		
+		Prix.setColumns(5);
+		
 		
 		JLabel label_Stock = new JLabel("Stock :");
 		panel_Quantité.add(label_Stock);
@@ -145,7 +146,7 @@ public class FEN_Détails_Fromage {
 		btn_ajouter_panier.setForeground(new Color(0, 0, 0));
 		btn_ajouter_panier.setBackground(new Color(50, 205, 50));
 		South_South.add(btn_ajouter_panier);
-		
+		updateAffichageStock(comboBox);
 		
 		JButton btn_annuler_ajout = new JButton("Annuler");
 		eventClose(btn_annuler_ajout);
@@ -191,8 +192,11 @@ public class FEN_Détails_Fromage {
 				
 			}
 		}
-		String stockArticle = "" + choix.getQuantitéEnStock();
-		affichage_Stock.setText(stockArticle);
+		String str = "" + choix.getQuantitéEnStock();
+		affichage_Stock.setText(str);
+		str = choix.getPrixTTC() + "€";
+		Prix.setText(str);
+		
 	}
 
 
