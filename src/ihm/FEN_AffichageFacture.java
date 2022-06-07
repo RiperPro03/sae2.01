@@ -48,6 +48,7 @@ public class FEN_AffichageFacture extends JDialog {
 			{
 				JTextPane facture = new JTextPane();
 				facture.setText(textfacture);
+				facture.setEditable(false);
 				scrollPane.setViewportView(facture);
 			}
 		}
