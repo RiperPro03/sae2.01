@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 import modele.Fromage;
 import modele.TypeLait;
@@ -78,12 +81,16 @@ public class FEN_Accueil {
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
 		
 		JLabel image_header = new JLabel("     ");
+		image_header.setHorizontalAlignment(SwingConstants.CENTER);
 		easterEgg(image_header);
 		ImageIcon fromageImg = new ImageIcon("src/img/iconFromage.png");
 		Image image = fromageImg.getImage();
 		Image newimg = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH);
 		fromageImg = new ImageIcon(newimg);
 		image_header.setIcon(fromageImg);
+		Border border = image_header.getBorder();
+		Border margin = new EmptyBorder(10,10,10,10);
+		image_header.setBorder(new CompoundBorder(border, margin));
 		header.add(image_header);
 		
 		txtFromageQuiRit = new JTextField();
