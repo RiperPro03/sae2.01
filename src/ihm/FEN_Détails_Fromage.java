@@ -201,9 +201,9 @@ public class FEN_Détails_Fromage {
 
 
 	private void addPanier(JComboBox comboBox, JSpinner spinner_nb_fromage, JButton btn_ajouter_panier) {
-		btn_ajouter_panier.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				
+		btn_ajouter_panier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 				int spVal = (int) spinner_nb_fromage.getValue(); // récupérer la valeur du spinner
 				Article choix = null;
 				for (Article a : fromage.getArticles()) {
@@ -236,8 +236,8 @@ public class FEN_Détails_Fromage {
 
 
 	private void eventClose(JButton btn) {
-		btn.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 			}
 		});

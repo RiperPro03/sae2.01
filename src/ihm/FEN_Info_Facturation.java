@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import modele.GenFacture;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -181,8 +183,8 @@ public class FEN_Info_Facturation {
 	}
 
 	private void commander(JButton Bouton1) {
-		Bouton1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		Bouton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(Nom.getText().isEmpty() || Prénom.getText().isEmpty() || Adresse.getText().isEmpty() || Ville.getText().isEmpty() || Téléphone.getText().isEmpty() || Mail.getText().isEmpty()) {
 					msgErreur("Veillez saisir vos informations de facturation");
 					return;
@@ -214,8 +216,8 @@ public class FEN_Info_Facturation {
 	}
 
 	private void fermerFEN(JButton Bouton2) {
-		Bouton2.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		Bouton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 			}
 		});

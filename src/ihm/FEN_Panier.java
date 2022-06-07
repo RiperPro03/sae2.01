@@ -123,12 +123,12 @@ public class FEN_Panier {
 		South3.add(Bouton1);
 		
 		Bouton2 = new JButton("Vider le panier");
-		Bouton2.addMouseListener(viderPanier());
+		Bouton2.addActionListener(viderPanier());
 		Bouton2.setBackground(Color.RED);
 		South3.add(Bouton2);
 		
 		Bouton3 = new JButton("Continuer les achats");
-		Bouton3.addMouseListener(closeFEN());
+		Bouton3.addActionListener(closeFEN());
 		Bouton3.setForeground(Color.WHITE);
 		Bouton3.setBackground(Color.BLUE);
 		South3.add(Bouton3);
@@ -166,8 +166,8 @@ public class FEN_Panier {
 	}
 
 	private void commanderPanier() {
-		Bouton1.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		Bouton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(Main.panier.isEmpty()) {
 					msgErreur("Vous n'avez pas d'articles à commander");
 					return;
@@ -180,8 +180,8 @@ public class FEN_Panier {
 	}
 
 	private void supUnArticleEvent() {
-		supArticle.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		supArticle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel m = (DefaultTableModel) table.getModel();
 				if (table.getSelectedRow() == -1) {
 					if (table.getSelectedRow() == 0) {
@@ -232,17 +232,17 @@ public class FEN_Panier {
 		});
 	}
 
-	private MouseAdapter closeFEN() {
-		return new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+	private ActionListener closeFEN() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 			}
 		};
 	}
 
-	private MouseAdapter viderPanier() {
-		return new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+	private ActionListener viderPanier() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				if(Main.panier.isEmpty()) {
 					msgErreur("Aucun article a supprimer");
 					return;

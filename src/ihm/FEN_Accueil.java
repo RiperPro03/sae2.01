@@ -172,8 +172,8 @@ public class FEN_Accueil {
 	}
 
 	private void ouvrirPanier() {
-		btn_panier.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
+		btn_panier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				FEN_Panier.launch();
 			}
 		});
