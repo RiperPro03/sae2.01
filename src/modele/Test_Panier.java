@@ -59,6 +59,7 @@ public class Test_Panier {
 		articles.getFromage("Brebis au Bleu").getArticles().get(0).setQuantitéEnStock(25);
 		panier.addArticle(articles.getFromage("Brebis au Bleu").getArticles().get(0), 1);
 		panier.viderPanier(articles);
+		assertEquals(panier.getPanier().size(),0);
 		assertEquals(articles.getFromage("Brebis au Bleu").getArticles().get(0).getQuantitéEnStock(),25);
 		
 	}
@@ -80,12 +81,12 @@ public class Test_Panier {
 		f.getArticles().forEach(t -> t.setQuantitéEnStock(25) );
 		panier.addArticle(f.getArticles().get(0), 3);
 		panier.addArticle(f.getArticles().get(1), 1);
-		assertEquals(panier.getTotal(), 43.9F,0);
+		assertEquals(panier.getTotal(), 38.5F,0);
 		
 	}
 	@Test 
 	public void testTotalPanierVide() {
-		assertEquals(panier.getTotal(),9.9F,0);
+		assertEquals(panier.getTotal(),4.5F,0);
 	}
 	
 	@Test
@@ -98,6 +99,29 @@ public class Test_Panier {
 		panier.addArticle(f.getArticles().get(1), 1);
 		panier.setModeLivraison(ModeLivraison.MONDIAL_RELAI);
 		assertEquals(panier.getTotal(),40F,0);
+	}
+	
+	@Test
+	public void testTotalSupérieurA100Euros() {
+		Fromage f = new Fromage("Vache");
+		f.addArticle("Poids", 10F);
+		f.addArticle("Moitié", 5F);
+		f.getArticles().forEach(t -> t.setQuantitéEnStock(25) );
+		panier.addArticle(f.getArticles().get(0), 5);
+		panier.addArticle(f.getArticles().get(1), 11);
+		assertEquals(panier.getTotal(),105F,0);
+	}
+	@Test
+	public void supprimerUnSeulArticle() {
+		articles.getFromage("Brebis au Bleu").getArticles().get(0).setQuantitéEnStock(25);
+		articles.getFromage("Brebis au Bleu").getArticles().get(1).setQuantitéEnStock(25);
+		panier.addArticle(articles.getFromage("Brebis au Bleu").getArticles().get(0), 1);
+		panier.addArticle(articles.getFromage("Brebis au Bleu").getArticles().get(1), 1);
+		panier.supprimerUnArticle(0,articles);
+		assertEquals(panier.getPanier().size(),1);
+		assertEquals(articles.getFromage("Brebis au Bleu").getArticles().get(0).getQuantitéEnStock(),25);
+		assertEquals(articles.getFromage("Brebis au Bleu").getArticles().get(1).getQuantitéEnStock(),24);
+		
 	}
 
 }

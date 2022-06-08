@@ -193,7 +193,7 @@ public class FEN_Panier {
 					if (table.getSelectedRow() == table.getRowCount() - 1 || table.getSelectedRow() == table.getRowCount() - 2 || table.getSelectedRow() == table.getRowCount() - 3) {
 						msgErreur("Selectionner un article à supprimer");
 					} else {
-						Main.panier.supprimerUnArticle(table.getSelectedRow());
+						Main.panier.supprimerUnArticle(table.getSelectedRow(),Main.stock);
 						m.removeRow(table.getSelectedRow());
 						updatePanier();
 					}
@@ -289,7 +289,7 @@ public class FEN_Panier {
 				"",
 				"",
 				"FRAIS DE PORT",
-				String.format("%.2f", Main.panier.getLivreur().getPrix()) + "€"
+				String.format("%.2f", Main.panier.getPrixLivraison()) + "€"
 		});
 		m.addRow(new Object[] {
 				"",

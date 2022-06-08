@@ -14,7 +14,7 @@ public class Panier {
 	public Panier () {
 		panier = new LinkedList<Article>(); 
 		livreur = ModeLivraison.DHL;
-		total = livreur.getPrix();
+		total = 0;
 	}
 	
 	
@@ -23,10 +23,12 @@ public class Panier {
 	}
 	
 	public float getTotal() {
-		return total;
+		if(total >= 100)
+			return total;
+		return total  + livreur.getPrix();
 	}
 	public float getTotalSansLivraison() {
-		return total - livreur.getPrix();
+		return total;
 	}
 	public List<Article> getPanier(){
 		return panier;
@@ -54,8 +56,7 @@ public class Panier {
 	}
 	
 	private void updateTotal() {
-		this.total = livreur.getPrix();
-
+		total = 0;
 		if(panier.isEmpty())
 			return;
 		updateTotalSansLivraison();
@@ -104,15 +105,23 @@ public class Panier {
 		this.total = 0 + livreur.getPrix();
 	}
 	
-	public void supprimerUnArticle(int index) {
-		Main.stock.getArticle(panier.get(index).getFromage().getDésignation(),panier.get(index).getClé()).rendreQuantité(panier.get(index).getQuantitéEnStock());
+	public void supprimerUnArticle(int index,Articles stock) {
+		stock.getArticle(panier.get(index).getFromage().getDésignation(),panier.get(index).getClé()).rendreQuantité(panier.get(index).getQuantitéEnStock());
 		panier.remove(index);
+		this.updateTotal();
 	}
 
 
 	public boolean isEmpty() {
 		
 		return panier.size() == 0;
+	}
+
+
+	public float getPrixLivraison() {
+		if(total >=100)
+			return 0;
+		return livreur.getPrix();
 	}
 		
 	}
